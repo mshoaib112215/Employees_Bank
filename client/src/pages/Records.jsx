@@ -226,7 +226,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
 
           {/* Pagination component */}
           <div className="flex gap-2 justify-between w-full ">
-            <h2 className="text-2xl font-semibold mb-4 text-[#6e6e6e]">Employee Entries</h2>
+            <h2 className="text-2xl font-semibold mb-4 ">Employee Entries</h2>
 
             <div className='flex items-center mb-4 '>
 

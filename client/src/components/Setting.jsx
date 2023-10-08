@@ -178,7 +178,7 @@ const Setting = ({ setAlert }) => {
     return (
         <>
             <div className="rounded-lg p-0 sm:p-4 w-full h-[100vh] relative">
-                <h2 className="mb-4  font-semibold text-gray-600 text-3xl" >Settings</h2>
+                <h2 className="mb-4  font-semibold  text-3xl" >Settings</h2>
 
                 {/* Applied For */}
                 <div className='bg-white  rounded-lg p-4 custom-shadow'>

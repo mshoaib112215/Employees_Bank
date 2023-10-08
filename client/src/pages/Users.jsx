@@ -116,7 +116,7 @@ const Users = ({ display, side, setAlert }) => {
       <div className="py-6 w-full ">
         <div className="flex justify-between items-center">
 
-          <h2 className="text-2xl font-semibold mb-4 text-[#6e6e6e]">Users</h2>
+          <h2 className="text-2xl font-semibold mb-4 ">Users</h2>
           {/* Pagination component */}
           <div className="flex gap-7">
 

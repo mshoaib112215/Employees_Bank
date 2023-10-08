@@ -169,7 +169,7 @@ const Users = ({ display, side, setAlert }) => {
           </div>
         </div>
         <div className="overflow-x-auto text-lg text-[#6e6e6e] capitalize rounded-xl custom-shadow">
-          <table className="min-w-full whitespace-nowrap">
+          <table className="min-w-full whitespace-nowrap text-[15px] text-left">
             <thead>
               <tr className="bg-gray-50">
                 <th className="px-4 py-2">Name</th>

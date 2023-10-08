@@ -3,6 +3,8 @@ const authController = require('../controller/authController');
 const employeeController = require('../controller/employeeController');
 const dropdownController = require('../controller/dropdownController');
 const auth = require('../middlewares/auth');
+const templateController = require('../controller/templateController');
+
 
 const router = express.Router();
 
@@ -10,21 +12,30 @@ const router = express.Router();
 
 // register
 router.post('/register', authController.register);
+router.get('/', (req, res) => {
+    res.status(200).json({ message: "Hello Backend :)" })
+});
 
 // login
 router.post('/login', authController.login);
 
 //delete user
-router.delete('/delete/:id', authController.deleteUser);
+router.delete('/delete/:id/:userId', authController.deleteUser);
 
 // update user
-router.put('/update/:id', authController.updateUser);
+router.put('/update/:id/:userId', authController.updateUser);
 
 // see users
-router.get('/users', authController.getUsers);
+router.get('/users', auth, authController.getUsers);
+// Get User by ID
+router.get('/user/:id', authController.getUser);
 
 // logout
 router.post('/logout', auth, authController.logout)
+// Upload Images
+router.post('/upload', auth, authController.uploadImage);
+
+router.get('/get-avatar/:id', authController.sendAvatar);
 
 // refresh
 router.get('/refresh', authController.refresh);
@@ -35,14 +46,23 @@ router.get('/refresh', authController.refresh);
 router.post('/create-entry', auth, employeeController.createEntry)
 // delete:id
 router.delete('/delete-entry/:id', auth, employeeController.deleteEntry)
+// delete-all:id
+router.delete('/delete-all', auth, employeeController.deleteManyEntry)
 // update:id
 router.put('/update-entry/:id', auth, employeeController.updateEntry)
 // read
-router.put('/entries', auth, employeeController.getEntries)
+router.get('/entries', auth, employeeController.getEntries)
 // read:id
 router.get('/employee/:id', auth, employeeController.getEmployee)
 
+/////////////////////// templete ////////////////////
+router.get('/templates', auth, templateController.getTemplate)
 
+router.post('/create-template', auth, templateController.addTemplate)
+
+router.delete('/delete-template/:id', auth, templateController.deleteTemplate)
+
+router.put('/template/:id', auth, templateController.updateTemplate)
 
 ////////////////// Drop down Endpoints ////////////////
 // Add dropdown (Applies for) element

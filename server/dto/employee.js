@@ -4,6 +4,7 @@ class employeeDTO{
         this.applied_for = employee.applied_for;
         this.name = employee.name;
         this.email = employee.email;
+        this.gender = employee.gender;
         this.phone = employee.phone;
         this.cnic = employee.cnic;
         this.type = employee.type;
@@ -12,6 +13,7 @@ class employeeDTO{
         this.city = employee.city;
         this.applied_date = employee.applied_date;
         this.created_by = employee.created_by;
+        this.createdAt = employee.createdAt;
 
     }
 }

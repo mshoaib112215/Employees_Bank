@@ -2,7 +2,7 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const DistributedBarChart = ({ categories, values }) => {
-    const categoryRowHeight = 70; // Adjust this value as needed
+    const categoryRowHeight = 60; // Adjust this value as needed
     let calculatedHeight = categories.length * categoryRowHeight;
     if(categories.length == 1){
         calculatedHeight = 105

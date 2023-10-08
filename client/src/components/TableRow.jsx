@@ -105,7 +105,7 @@ const TableRow = ({ entry, setClicked, index, users = false, isEmployee, checkAl
             {/* <button onClick={getCheckedValues}>get values</button> */}
             {!users ?
                 <tr className='relative cursor-pointer' onClick={() => setClicked(index)}>
-                    {!isHome && role == 'admin' && <td className="p-4 whitespace-nowrap text-center">
+                    {!isHome && role == 'admin' && <td className="p-4 whitespace-nowrap ">
                         <input
                             type="checkbox"
                             className="pl-5 w-4 custom-checkbox"
@@ -122,11 +122,11 @@ const TableRow = ({ entry, setClicked, index, users = false, isEmployee, checkAl
                         />
                         
                     </td>}
-                    <td className="p-4 whitespace-nowrap text-center">{entry.name}</td>
+                    <td className="p-4 whitespace-nowrap ">{entry.name}</td>
 
 
-                    <td className="p-4 whitespace-nowrap text-center lowercase">{entry.email}</td>
-                    <td className="p-4 whitespace-nowrap text-center flex">0{entry.phone.toString().substring(0, 3)}-
+                    <td className="p-4 whitespace-nowrap  lowercase">{entry.email}</td>
+                    <td className="p-4 whitespace-nowrap  flex">0{entry.phone.toString().substring(0, 3)}-
                         <span>{entry.phone.toString().substring(3)}</span>
                         <button
                             className="ml-2 px-2 py-1 flex bg-blue-50 text-white rounded-md hover:bg-blue-100"
@@ -148,9 +148,9 @@ const TableRow = ({ entry, setClicked, index, users = false, isEmployee, checkAl
 
                         </button>
                     </td>
-                    <td className="p-4 whitespace-nowrap text-center">{entry.gender}</td>
-                    <td className="p-4 whitespace-nowrap text-center">{entry.city}</td>
-                    <td className="p-4 whitespace-nowrap text-center flex">
+                    <td className="p-4 whitespace-nowrap ">{entry.gender}</td>
+                    <td className="p-4 whitespace-nowrap ">{entry.city}</td>
+                    <td className="p-4 whitespace-nowrap  flex">
                         {entry.cnic.toString().substring(0, 5)}-
                         <span>{entry.cnic.toString().substring(5, 12)}-</span>
                         {entry.cnic.toString().substring(12)}
@@ -176,19 +176,19 @@ const TableRow = ({ entry, setClicked, index, users = false, isEmployee, checkAl
                         </button>
                     </td>
 
-                    <td className="p-4 whitespace-nowrap text-center">{entry.applied_for}</td>
-                    <td className="p-4 whitespace-nowrap text-center">{entry.type}</td>
-                    <td className="p-4 whitespace-nowrap text-center">{entry.status}</td>
-                    <td className="p-4 whitespace-nowrap text-center">{creatorName}</td>
-                    <td className="p-4 whitespace-nowrap text-center">{date} <span className='p-1 rounded-md bg-blue-600 uppercase text-white'>{time}</span></td>
-                    <td className="p-4 whitespace-nowrap text-center">{entry_date} </td>
+                    <td className="p-4 whitespace-nowrap ">{entry.applied_for}</td>
+                    <td className="p-4 whitespace-nowrap ">{entry.type}</td>
+                    <td className="p-4 whitespace-nowrap ">{entry.status}</td>
+                    <td className="p-4 whitespace-nowrap ">{creatorName}</td>
+                    <td className="p-4 whitespace-nowrap ">{date} <span className='p-1 rounded-md bg-blue-600 uppercase text-white'>{time}</span></td>
+                    <td className="p-4 whitespace-nowrap ">{entry_date} </td>
                 </tr>
                 :
                 <tr className='relative cursor-pointer' onClick={() => setClicked(index)}>
-                    <td className="p-4 whitespace-nowrap text-center">{entry.name}</td>
-                    <td className="p-4 whitespace-nowrap text-center">{entry.username}</td>
-                    <td className="p-4 whitespace-nowrap text-center lowercase">{entry.email}</td>
-                    <td className="p-4 whitespace-nowrap text-center "><span className={`p-1 rounded-md ${entry.role === 'HR' ? 'bg-yellow-600' : entry.role === 'admin' ? 'bg-green-600' : 'bg-blue-600'} capitalize text-white`}>{entry.role}</span></td>
+                    <td className="p-4 whitespace-nowrap ">{entry.name}</td>
+                    <td className="p-4 whitespace-nowrap ">{entry.username}</td>
+                    <td className="p-4 whitespace-nowrap  lowercase">{entry.email}</td>
+                    <td className="p-4 whitespace-nowrap  "><span className={`p-1 rounded-md ${entry.role === 'HR' ? 'bg-yellow-600' : entry.role === 'admin' ? 'bg-green-600' : 'bg-blue-600'} capitalize text-white`}>{entry.role}</span></td>
                 </tr>}
 
 

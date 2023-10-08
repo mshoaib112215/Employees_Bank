@@ -13,7 +13,7 @@
                 bar: {
                         horizontal: false,
                         borderRadius: 10,
-                        columnWidth: 50,
+                        columnWidth: 30,
                 },
             },
             xaxis: {
@@ -68,11 +68,11 @@
         };
 
         return (
-            <div className="sm:w-[90%] w-full z-[0] mx-5 sm:mx-0 mt-3 transition-all ">
+            <div className=" w-full z-[0] mx-5 sm:mx-0 mt-3 transition-all ">
                 <ReactApexChart
                     series={series}
                     type='bar'
-                    height={500}
+                    height={450}
                     options={chartOptions}
                     
                 />

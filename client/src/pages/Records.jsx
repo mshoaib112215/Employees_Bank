@@ -332,8 +332,8 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
 
         {role == 'admin' && <button disabled={selectedValues.length === 0} className='flex cursor-pointer gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed bg-red-600 text-white p-1 text-sm border-none rounded-md mb-3' onClick={() => setDeleteSelectedRecordsClick(true)}>Delete selected records</button>}
 
-        <div className="overflow-x-auto text-lg text-[#6e6e6e] capitalize">
-          <table className="min-w-full whitespace-nowrap text-[14px] 3xl:text-[15px]">
+        <div className="overflow-x-auto text-lg capitalize rounded-xl custom-shadow">
+          <table className="min-w-full whitespace-nowrap text-[14px] 3xl:text-[15px] text-left">
             <thead>
               <tr className="bg-gray-50 ">
                 {role == 'admin' && <th className="px-4 py-2"><input type="checkbox" checked={checkAllClick} className='pl-5 custom-checkbox' onClick={() => setCheckAllClick(!checkAllClick)} /></th>}

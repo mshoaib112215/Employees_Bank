@@ -13,10 +13,12 @@ import Loader from './Loader'
 import { useDispatch } from 'react-redux'
 
 
+
 const Navbar = ({ setAlert }) => {
   const name = useSelector((state) => state.user.name)
   const role = useSelector((state) => state.user.role)
   const [profileClick, setProfileClick] = useState(false);
+  const [profileClick2, setProfileClick2] = useState(false);
   const user = useSelector((state) => state.user)
   const [showErrors, setShowErrors] = useState(false)
 
@@ -110,23 +112,44 @@ const Navbar = ({ setAlert }) => {
     <>
       <nav className='flex justify-between p-1 bg-gray-500  px-6 border-none  text-white fixed w-screen z-50' style={{ background: "#26738d" }}>
         <NavLink to={`${role == 'HR' ? '/records' : '/'}`} className='flex items-center gap-4'>
-          <img className= 'w-14 ' src={reactLogo} alt="SE Employees Bank" />
-          <img className='w-80 absolute -top-3 -left-7 hidden sm:block'  src={textSvg} alt="Candi Track" />
+          <img className='w-14 ' src={reactLogo} alt="SE Employees Bank" />
+          <img className='w-80 absolute -top-3 -left-7 hidden sm:block' src={textSvg} alt="Candi Track" />
           {/* <h1 className='text-xl font-semibold text-[#f3f3f3] hidden sm:block'>Employees Bank</h1> */}
         </NavLink>
-        <div className='flex items-center gap-3 px-2 py-0 cursor-pointer hover:bg-[#97c0cf] hover:text-black  text-[#f3f3f3] transition-all rounded-lg' onClick={() => setProfileClick(true)}>
+        <div className='flex items-center gap-3 px-2 py-0 cursor-pointer    text-[#f3f3f3] transition-all rounded-lg' onClick={() => setProfileClick(!profileClick)}>
 
           <img className='w-8 rounded-full h-8 border-2 border-gray-200' src={user.avatar || "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDQ4IDQ4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxtYXNrIGlkPSJpcFNBdmF0YXIwIj48cGF0aCBmaWxsPSIjZmZmIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iNCIgZD0iTTUuMDA0IDQyLjIzMWEuNzguNzggMCAwIDAgLjc5MS43NjloMzYuNDA3YS43OC43OCAwIDAgMCAuNzkyLS43Njl2LS45MThjLjAxOC0uMjc3LjA1NS0xLjY1Ny0uODU1LTMuMTg0Yy0uNTc0LS45NjMtMS40MDctMS43OTQtMi40NzYtMi40NzJjLTEuMjkzLS44Mi0yLjkzOC0xLjQxMy00LjkyOC0xLjc3YTI5LjIzNiAyOS4yMzYgMCAwIDEtMy4wMDItLjU4NGMtMi42MzItLjY3Mi0yLjg2Mi0xLjI2Ny0yLjg2NC0xLjI3M2EuNzYzLjc2MyAwIDAgMC0uMDY2LS4xNjljLS4wMjItLjExLS4wNzUtLjUyOC4wMjctMS42NDdjLjI1OC0yLjg0MyAxLjc4My00LjUyMyAzLjAwOC01Ljg3M2MuMzg2LS40MjUuNzUxLS44MjggMS4wMzItMS4yMjJjMS4yMTMtMS43IDEuMzI1LTMuNjM1IDEuMzMtMy43NTVhMiAyIDAgMCAwLS4wODctLjYyOGMtLjEyLS4zNy0uMzQzLS42LS41MDctLjc3YTIuODc0IDIuODc0IDAgMCAxLS4xMTMtLjEyYy0uMDEyLS4wMTQtLjA0NC0uMDUyLS4wMTUtLjI0M2ExOS4wMSAxOS4wMSAwIDAgMCAuMjAzLTEuODU3Yy4wNTYtMS4wMDIuMDk5LTIuNS0uMTYtMy45NTlhNi4wMzEgNi4wMzEgMCAwIDAtLjE3Mi0uODI1Yy0uMjczLTEuMDA0LS43MTEtMS44NjItMS4zMi0yLjU3Yy0uMTA1LS4xMTUtMi42NTMtMi44LTEwLjA1LTMuMzVjLTEuMDIzLS4wNzYtMi4wMzQtLjAzNS0zLjAzLjAxNmE0LjM5IDQuMzkgMCAwIDAtLjg3NS4xMDhjLS43NjQuMTk3LS45NjguNjgxLTEuMDIxLjk1MmMtLjA4OS40NS4wNjcuNzk4LjE3IDEuMDNjLjAxNS4wMzMuMDM0LjA3NC4wMDEuMTgyYy0uMTcxLjI2Ni0uNDQyLjUwNi0uNzE3LjczM2MtLjA4LjA2Ny0xLjkzNCAxLjY2Ny0yLjAzNiAzLjc1NmMtLjI3NSAxLjU4OS0uMjU1IDQuMDY0LjA3IDUuNzc1Yy4wMi4wOTUuMDQ3LjIzNS4wMDIuMzNjLS4zNS4zMTMtLjc0Ni42NjgtLjc0NSAxLjQ3OGMuMDA0LjA4Mi4xMTcgMi4wMTYgMS4zMyAzLjcxN2MuMjguMzk0LjY0NS43OTYgMS4wMyAxLjIyMWwuMDAyLjAwMWMxLjIyNSAxLjM1IDIuNzUgMy4wMyAzLjAwOCA1Ljg3MmMuMTAxIDEuMTIuMDQ4IDEuNTM3LjAyNyAxLjY0OGEuNzU4Ljc1OCAwIDAgMC0uMDY3LjE2OWMtLjAwMS4wMDYtLjIzLjU5OS0yLjg1IDEuMjdjLTEuNTEyLjM4Ny0zIC41ODUtMy4wNDUuNTljLTEuOTM0LjMyNy0zLjU2OS45MDYtNC44NiAxLjcyMWMtMS4wNjUuNjczLTEuOSAxLjUwNy0yLjQ4IDIuNDc3Yy0uOTI4IDEuNTUtLjkwMyAyLjk2Mi0uODkgMy4yMnYuOTIzWiIvPjwvbWFzaz48cGF0aCBmaWxsPSIjZDFkMWQxIiBkPSJNMCAwaDQ4djQ4SDB6IiBtYXNrPSJ1cmwoI2lwU0F2YXRhcjApIi8+PC9zdmc+"} alt="" />
-          <h1 className='text-xl  '> <span className='capitalize  hover:text-black'>{name}</span></h1>
+          <h1 className='text-xl  flex justify-between'> 
+            <span className='capitalize select-none'>{name}</span>
+            <span className={`${profileClick ? "-rotate-90" : "rotate-90"} transition-all origin-center w-[24px] h-[24px] m-1` }>
+            <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 12L31 24L19 36" />
+            </svg>
+            </span>
+          </h1>
         </div>
+        {profileClick &&
+          <div className='absolute right-7 top-[4.3rem] py-4  bg-white text-black rounded-lg custom-shadow'>
+            <ul className='flex flex-col w-36 cursor-pointer'>
+              <li className='hover:bg-gray-50 px-4 py-1' onClick={() => { setProfileClick2(true); setProfileClick(false) }}>My Profile</li>
+              
+              <NavLink title="Logout" to={"/logout"} onClick={() => setProfileClick(false)} className='hover:bg-gray-50 px-4 py-1'  >
+
+                  Logout
+
+                  </NavLink>
+            </ul>
+          </div>
+        }
       </nav>
-      {profileClick &&
+      {profileClick2 &&
         <>
+
           <div className="fixed inset-0 pt-10 overflow-y-scroll flex justify-center h-screen bg-gray-500 bg-opacity-50 z-[100]">
             <div className="bg-white absolute rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-1/2 h-[90vh] 3xl:h-fit">
               <button
                 className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem] bg-red-600 p-2 w-10 h-10 flex justify-center items-center"
-                onClick={() => setProfileClick(false)}
+                onClick={() => setProfileClick2(false)}
               >
                 <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path fill="#fff" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />

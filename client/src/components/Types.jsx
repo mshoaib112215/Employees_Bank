@@ -148,8 +148,8 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                 </div>
             )}
             {edit ? (
-                <div className="fixed inset-0 pt-20 pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20" >
-                    <div className="bg-white rounded-3xl p-4 pb-10 w-[80vw] sm:w-1/2 h-fit  relative">
+                <div className="fixed inset-0 pt-20 pb-6 flex justify-center items-center bg-gray-500 bg-opacity-50 z-20 " >
+                    <div className="bg-white rounded-3xl p-4 pb-10 w-[80vw] sm:w-1/2 h-fit  relative custom-shadow">
                         <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setEdit(false)}>
                             <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path fill="#fff" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />

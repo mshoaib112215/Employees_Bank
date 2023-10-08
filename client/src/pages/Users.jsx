@@ -113,7 +113,7 @@ const Users = ({ display, side, setAlert }) => {
 
   return (
     <>
-      <div className="py-6 w-full">
+      <div className="py-6 w-full ">
         <div className="flex justify-between items-center">
 
           <h2 className="text-2xl font-semibold mb-4 text-[#6e6e6e]">Users</h2>
@@ -168,7 +168,7 @@ const Users = ({ display, side, setAlert }) => {
 
           </div>
         </div>
-        <div className="overflow-x-auto text-lg text-[#6e6e6e] capitalize">
+        <div className="overflow-x-auto text-lg text-[#6e6e6e] capitalize rounded-xl custom-shadow">
           <table className="min-w-full whitespace-nowrap">
             <thead>
               <tr className="bg-gray-50">

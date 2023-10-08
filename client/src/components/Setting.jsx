@@ -181,7 +181,7 @@ const Setting = ({ setAlert }) => {
                 <h2 className="mb-4  font-semibold text-gray-600 text-3xl" >Settings</h2>
 
                 {/* Applied For */}
-                <div className='bg-white  rounded-lg p-4'>
+                <div className='bg-white  rounded-lg p-4 custom-shadow'>
                     <div className='flex justify-start select-none gap-5 items-center mb-5'>
 
                         <h3 className={`text-xl cursor-pointer transition-all duration-100 h-fit   ${appliedForClick ? 'underline underline-offset-8 font-semibold' : ''}`}
@@ -196,7 +196,7 @@ const Setting = ({ setAlert }) => {
                     </div>
                     {appliedForClick &&
                         <>
-                            <div className="flex justify-end">
+                            <div className="flex justify-end ">
 
                                 <button className='bg-blue-500 px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd(!clickAdd)}>Add New</button>
                             </div>
@@ -360,7 +360,7 @@ const Setting = ({ setAlert }) => {
 
                 {clickAdd &&
                     <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20">
-                        <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative">
+                        <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative custom-shadow">
                             <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setClickAdd(!clickAdd)}>
                                 <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="#fff" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />
@@ -392,7 +392,7 @@ const Setting = ({ setAlert }) => {
                 }
                 {clickAdd2 &&
                     <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20">
-                        <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative">
+                        <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative custom-shadow">
                             <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setClickAdd2(!clickAdd2)}>
                                 <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="#fff" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />
@@ -424,8 +424,8 @@ const Setting = ({ setAlert }) => {
 
                 }
                 {clickAdd3 &&
-                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20">
-                        <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative">
+                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20 ">
+                        <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative custom-shadow" >
                             <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setClickAdd3(!clickAdd3)}>
                                 <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path fill="#fff" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />

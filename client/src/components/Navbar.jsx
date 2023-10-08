@@ -124,7 +124,7 @@ const Navbar = ({ setAlert }) => {
             <span className={`${profileClick ? "-rotate-90" : "rotate-90"} transition-all origin-center w-[24px] h-[24px] m-1` }>
             <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
               <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 12L31 24L19 36" />
-            </svg>
+            </svg>  
             </span>
           </h1>
         </div>

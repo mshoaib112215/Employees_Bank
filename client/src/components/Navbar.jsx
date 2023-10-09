@@ -167,7 +167,7 @@ const Navbar = ({ setAlert }) => {
         <>
 
         <div className="fixed inset-0 pt-10  flex justify-center h-screen bg-gray-500 bg-opacity-50 z-[100]  backdrop-blur-md backdrop-filter ">
-            <div className="bg-white absolute rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-1/2 h-fit">
+            <div className="bg-white absolute rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-3/4 h-fit">
               <button
                 className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem] bg-red-600 p-2 w-10 h-10 flex justify-center items-center"
                 onClick={() => setProfileClick2(false)}
@@ -273,7 +273,7 @@ const Navbar = ({ setAlert }) => {
 
                   <div className="flex justify-center">
 
-                  <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400 outline-none border-none' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={handleEditEntry} />
+                  <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-[20%] self-end rounded-full my-3 hover:bg-blue-400 outline-none border-none' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={handleEditEntry} />
                   </div>
                 </div>
               </div>

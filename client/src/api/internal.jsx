@@ -9,6 +9,7 @@ const navigating = () => {
 }
 const api = axios.create({
     baseURL: 'https://139.59.79.69:3000/',
+    // baseURL: 'https://192.168.83.48:3000/',
     withCredentials: true,
     headers: {  
         'Content-Type': 'application/json',
@@ -40,6 +41,42 @@ export const uploadImage = async (data) => {
 
     try {
         response = await api.post("/upload", { image: data });
+        return response
+
+    }
+    catch (error) {
+        try {
+
+            if (error.code === "ERR_BAD_RESPONSE") {
+                // Trigger the refresh endpoint here
+                const refreshResponse = await api.get("/refresh");
+                console.log('in expire JWT tokens');
+                // Check if the refresh was successful
+                if (refreshResponse.status === 200) {
+                    // Retry the original request with the new token
+                    uploadImage(data)
+                }
+                else {
+
+                    navigating
+                }
+
+
+
+            }
+        }
+        catch (error) {
+            console.log(error)
+            return null;
+        }
+        return error;
+    }
+}
+export const deleteImage = async (data) => {
+    let response;
+
+    try {
+        response = await api.delete("/delete-avatar", { user: data });
         return response
 
     }

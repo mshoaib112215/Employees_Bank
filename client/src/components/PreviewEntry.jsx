@@ -26,7 +26,7 @@ const PreviewEntry = ({ setPreviewClicked, currentRecords, previewClicked, id })
 
     return (
 
-        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen  bg-gray-500 bg-opacity-50 z-[100]" >
+        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen  bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter" >
 
             <div className="bg-white absolute  rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-[40%] h-fit ">
                 <div className="bg-white  rounded-lg p-4 w-screen sm:w-full relative">

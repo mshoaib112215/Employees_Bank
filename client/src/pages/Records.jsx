@@ -230,7 +230,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
 
             <div className='flex items-center mb-4 '>
 
-              <button className="bg-blue-500 px-3 py-2 hover:bg-blue-400 text-white rounded-full" onClick={() => setIsAddClicked(!isAddClicked)}>Add Entry</button>
+              <button className="bg-[#26b0ff] px-3 py-2 hover:bg-blue-400 text-white rounded-full" onClick={() => setIsAddClicked(!isAddClicked)}>Add Entry</button>
             </div>
           </div>
         </div>
@@ -318,7 +318,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
             disabled={isAddClicked ? true : false}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button className='flex cursor-pointer gap-2 bg-blue-600 text-white p-1 text-sm border-none rounded-md' onClick={() => clearSerach()}>
+          <button className='flex cursor-pointer gap-2 bg-[#26b0ff] text-white p-1 text-sm border-none rounded-md' onClick={() => clearSerach()}>
             <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path fill="#fff" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />
             </svg>
@@ -423,7 +423,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
             pageClassName={'hidden'}
             previousClassName={'px-3 py-1 flex-wrap bg-white border rounded-lg cursor-pointer'}
             nextClassName={'px-3 bg-white py-1 border flex-wrap rounded-lg cursor-pointer'}
-            activeClassName={'!bg-blue-500 text-white'}
+            activeClassName={'!bg-[#26b0ff] text-white'}
             disabledClassName={'text-gray-300 cursor-not-allowed'}
           />
         </div>

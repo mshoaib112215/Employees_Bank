@@ -106,21 +106,7 @@ const Sidebar = ({ side, setSide, display, setDisplay, setAlert }) => {
 
           </div>
         }
-        <div className="h-screen flex items-end">
-
-          <NavLink title="Logout" to={"/logout"} className="flex items-center  gap-3 p-2 hover:text-[#f3f3f3] transition-all font-semibold">
-          <svg width={`${side ? "35" : "25"}`} height={`${side ? "35" : "25"}`} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#fff" d="M5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h7v2H5v14h7v2H5Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5l-5 5Z" />
-          </svg>
-              <span className={`${side ? "hidden absolute" : "block"} flex justify-between items-end w-full`}>
-                <p>
-
-                  Logout
-                </p>
-              
-              </span>
-        </NavLink>
-        </div>
+        
         <button className='absolute bottom-10 font-extrabold -right-3 rounded-full bg-[#151515]  p-2 pb-3 w-8 flex items-center justify-center h-8' onClick={() => setSide(!side)}>{side ? '>' : '<'}</button>
         <button className='absolute bottom-1 font-semibold -right-3 rounded-full bg-[#151515]  p-2 pb-3 w-8 flex items-center justify-center h-8' onClick={() => setDisplay(!display)}>x</button>
       </aside>}

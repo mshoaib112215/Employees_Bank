@@ -297,17 +297,18 @@ const Home = ({ once, setOnce }) => {
             </div>
 
             <div className="py-6 text-lg  capitalize">
-                <div className="flex justify-between items-center flex-wrap flex-col sm:flex-row">
 
-                    <h2 className="text-3xl  mb-4 font-[600]  text-center w-full">Recent Entries</h2>
+
+                <div className=" custom-shadow rounded-xl bg-white">
+                <div className="flex justify-between items-center flex-wrap flex-col sm:flex-row ">
+
+                    <h2 className="text-3xl  my-4 font-[600]  text-center w-full">Recent Entries</h2>
                     {/* Pagination component */}
 
 
                 </div>
-
-
-                <div className="overflow-x-auto text-lg  capitalize custom-shadow rounded-xl">
-
+                    <div className='overflow-x-auto text-lg  capitalize'>
+                                
                     <table className="min-w-full whitespace-nowrap text-[15px] text-left">
                         <thead>
                             <tr className="bg-gray-50 ">
@@ -345,6 +346,8 @@ const Home = ({ once, setOnce }) => {
 
 
                     </table>
+                    </div>
+
                 </div>
                 {/* Pagination component
                 <div className="flex justify-center items-center mt-4 flex-wrap">

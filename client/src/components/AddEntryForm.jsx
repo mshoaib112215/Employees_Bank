@@ -361,7 +361,7 @@ const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData
         setRemarks(e.target.value)
     }
     return (
-        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen  bg-gray-500 bg-opacity-50 z-[100]" >
+        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen  bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter" >
 
             <div className="bg-white absolute  rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-1/2 h-[90vh] 3xl:h-fit custom-shadow">
 
@@ -666,8 +666,8 @@ const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData
 
                         <div className='flex justify-center gap-3 text-lg 3xl:text-2xl'>
 
-                            <input className='bg-blue-500 disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 sm:w-1/3 flex-1 3xl:flex-none 3xl:w-1/3 self-end rounded-full hover:shadow-md shadow-black my-3 hover:bg-blue-400 transition-all' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={() => handleAddEntry(false)} />
-                            <input className='bg-blue-500 disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 flex-1 sm:w-1/3 self-end 3xl:flex-none 3xl:w-1/3 rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit & Add More" onClick={() => handleAddEntry(true)} />
+                            <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 sm:w-1/3 flex-1 3xl:flex-none 3xl:w-1/3 self-end rounded-full hover:shadow-md shadow-black my-3 hover:bg-blue-400 transition-all' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={() => handleAddEntry(false)} />
+                            <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 flex-1 sm:w-1/3 self-end 3xl:flex-none 3xl:w-1/3 rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit & Add More" onClick={() => handleAddEntry(true)} />
                         </div>
                     </div>
                 </div>

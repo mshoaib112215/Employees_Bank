@@ -41,9 +41,12 @@ export const userSlice = createSlice({
             state.name = action.payload.newName
             state.email = action.payload.email
 
+        },
+        resetAvatar: (state) => {
+            state.avatar = ''
         }
     }
 })
-export const { setUser, resetUser, updateNameAndAvatar } = userSlice.actions;
+export const { setUser, resetUser, updateNameAndAvatar, resetAvatar  } = userSlice.actions;
 
 export default userSlice.reducer;

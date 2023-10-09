@@ -180,7 +180,7 @@ const Dashboard = ({ setAlert }) => {
                     {role == 'admin' && <Route path="/users" element={<Users display={display} side={side} setAlert={setAlert} isAddClicked={isAddClicked} setIsAddClicked={setIsAddClicked} />} />}
                     {role == 'admin' && <Route path="/settings" element={<SettingPage setAlert={setAlert} />} />}
                     {(role == 'admin' || role == 'HR') && <Route path="/records" element={<Records display={display} side={side} setAlert={setAlert} isAddClicked={isAddClicked} setIsAddClicked={setIsAddClicked} />} />}
-                    <Route path="/logout" element={<div className={`fixed  inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20 `}>
+                    <Route path="/logout" element={<div className={`fixed  inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter`}>
                         <div className="bg-white rounded-lg p-4">
                             <p className="mb-4">Are you sure you want to logout?</p>
                             <div className="flex justify-end">

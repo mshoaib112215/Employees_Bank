@@ -47,7 +47,7 @@ const DistributedBarChart = ({ categories, values }) => {
     ];
 
     return (
-        <div className="sm:w-[90%] w-full flex-1 -z-3">
+        <div className=" w-full flex-1 -z-3">
             <div className="mt-3 h-[300px] md:h-auto w-full" style={{ height: 'auto' }}>
                 <ReactApexChart
                     series={chartSeries}

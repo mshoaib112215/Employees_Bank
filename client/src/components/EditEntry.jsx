@@ -413,7 +413,7 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
     }
 
     return (
-        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen  bg-gray-500 bg-opacity-50 z-[100]" >
+        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen  bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter" >
 
             <div className="bg-white absolute  rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-1/2 h-[90vh] 3xl:h-fit ">
                 <div className="bg-white  rounded-lg p-4 w-screen sm:w-full relative">
@@ -688,7 +688,7 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
                                 </div>
                                 <div className="flex justify-center">
 
-                                <input className='bg-blue-500 disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Edit" onClick={handleEditEntry} />
+                                    <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Edit" onClick={handleEditEntry} />
                                 </div>
                             </div>
                             :
@@ -765,7 +765,7 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
                                 />
                                 <div className="flex justify-center">
 
-                                    <input className='bg-blue-500 disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={handleEditEntry} />
+                                    <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={handleEditEntry} />
                                 </div>
                             </div>
                         }

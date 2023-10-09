@@ -1,6 +1,8 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /* styles.css */
 .custom-scrollbar::-webkit-scrollbar {
@@ -68,3 +70,7 @@ select option {
 .login_button:hover {
     background: linear-gradient(to right, #00a2ff 10%, #ffd600 10%, #ffd600 90%, #00a2ff 90%);
 } */
+
+.custom-edit-btn{
+    clip-path: circle(50% at 50% 50%),
+}

@@ -11,6 +11,7 @@ import { setAllUser, resetAllUser } from '../store/allUserSlice'
 import { resetAvatar, resetUser, updateNameAndAvatar } from '../store/userSlice'
 import Loader from './Loader'
 import { useDispatch } from 'react-redux'
+import { resetEmployees } from '../store/employeeSlice'
 
 
 
@@ -21,6 +22,7 @@ const Navbar = ({ setAlert }) => {
   const [profileClick2, setProfileClick2] = useState(false);
   const user = useSelector((state) => state.user)
   const [showErrors, setShowErrors] = useState(false)
+  const [saveClicked, setSaveClicked] = useState(false);
 
   const dispatch = useDispatch()
 
@@ -83,6 +85,10 @@ const Navbar = ({ setAlert }) => {
 
 
     response = await EditUser(values, user._id, user._id)
+    dispatch(resetAllUser())
+    dispatch(resetUser())
+    dispatch(resetAvatar())
+    dispatch(resetEmployees())
 
     if (response?.data.modifiedCount >= 1) {
 
@@ -166,7 +172,7 @@ const Navbar = ({ setAlert }) => {
       {profileClick2 &&
         <>
 
-        <div className="fixed inset-0 pt-10  flex justify-center h-screen bg-gray-500 bg-opacity-50 z-[100]  backdrop-blur-md backdrop-filter ">
+          <div className="fixed inset-0 pt-10  flex justify-center h-screen bg-gray-500 bg-opacity-50 z-[100]  backdrop-blur-md backdrop-filter ">
             <div className="bg-white absolute rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-3/4 h-fit">
               <button
                 className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem] bg-red-600 p-2 w-10 h-10 flex justify-center items-center"
@@ -273,15 +279,28 @@ const Navbar = ({ setAlert }) => {
 
                   <div className="flex justify-center">
 
-                  <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-[20%] self-end rounded-full my-3 hover:bg-blue-400 outline-none border-none' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={handleEditEntry} />
+                  <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-[20%] self-end rounded-full my-3 hover:bg-blue-400 outline-none border-none' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={() => { setSaveClicked(true); setProfileClick2(false) }} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
+          
+
         </>
       }
+      {saveClicked && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter">
+          <div className="bg-white rounded-lg p-4">
+            <p className="mb-4">After saving you will be redirected to login again. Are you sure you want to Save them?</p>
+            <div className="flex justify-end">
+              <button className="border border-blue-500 px-3 py-1 rounded-md mr-2 hover:bg-blue-500 hover:text-white" onClick={() => {setSaveClicked(false) ; setProfileClick2(true)}}>No</button>
+              <button className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600" onClick={() => handleEditEntry()}>Yes</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

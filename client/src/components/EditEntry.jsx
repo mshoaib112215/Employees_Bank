@@ -19,9 +19,9 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
     const [types, setTypes] = useState([])
     const [showErrors, setShowErrors] = useState(false);
     const [employeeTypes, setEmployeeTypes] = useState([])
-    
+
     const [record, setRecord] = useState(null)
-    
+
     const [remarks, setRemarks] = useState('');
     const userId = useSelector((state) => state.user._id)
     const dispatch = useDispatch();
@@ -295,10 +295,10 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
     useEffect(() => {
         setRecord(currentRecords.filter(entry => entry._id == id))
     }, [id])
-    useEffect(()=>{
+    useEffect(() => {
         setRemarks(record?.[0]?.remarks)
 
-    },[record])
+    }, [record])
     let formattedDate;
     if (!users) {
 
@@ -413,9 +413,10 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
     }
 
     return (
-        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen  bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter" >
+        <div className="fixed inset-0 pt-10 overflow-y-scroll  flex justify-center h-screen text-[16px] bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter" >
 
-            <div className="bg-white absolute  rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-1/2 h-[90vh] 3xl:h-fit ">
+            <div className="bg-white absolute  rounded-3xl p-4 pb-10 w-[80vw] mb-10 sm:w-3/4 h-fit 3xl:h-fit custom-shadow">
+
                 <div className="bg-white  rounded-lg p-4 w-screen sm:w-full relative">
                     <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setShowEditForm(!showEditForm)}>
                         <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -423,10 +424,10 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
                         </svg>
                     </button>
 
-                    <h2 className="mb-4 text-3xl">Edit Form</h2>
+                    <h2 className="mb-4 text-2xl">Edit Form</h2>
                     <div >
                         {!users ?
-                            <div className='flex h-[70vh] 3xl:h-auto  flex-col   px-4 overflow-y-scroll custom-scrollbar' >
+                            <div className='flex h-[70vh] 3xl:h-auto  flex-col  font-normal px-4 overflow-y-scroll custom-scrollbar' >
                                 <div className='flex gap-2 md:flex-row flex-col '>
                                     <TextInput
                                         label="Name"
@@ -481,7 +482,12 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
                                                 control: (provided, state) => ({
                                                     ...provided,
                                                     border: '1px solid black',
-                                                    height: '120%'
+                                                    height: '110%',
+                                                    borderRadius: '7px',
+                                                    fontSize: '18px',
+                                                    ":focus": {
+                                                        border: 'none'
+                                                    }
 
                                                 }),
                                                 option: (provided, state) => ({
@@ -598,81 +604,80 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
                                     </div>
                                 </div>
 
-                                <label className='text-lg mb-2'>Status</label>
-                                <div className='flex gap-2 '>
-                                    <input
-                                        className="w-4"
-                                        type="radio"
-                                        name="status"
-                                        id="hired"
-                                        value="Hired"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        checked={values.status === 'Hired'}
-                                    />
-                                    <label htmlFor="hired">Hired</label>
-                                </div>
-                                <div className='flex gap-2 mt-1'>
-                                    <input
-                                        className="w-4"
-                                        type="radio"
-                                        name="status"
-                                        id="rejected"
-                                        value="Rejected"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        checked={values.status === 'Rejected'}
-                                    />
-                                    <label htmlFor="rejected">Rejected</label>
-                                </div>
-                                {errors.status && touched.status && (
-                                    <div className="text-red-500 text-sm">{errors.status}</div>
-                                )}
 
-                                <div className='flex flex-col items-start gap-2 flex-1 w-full'>
+                                <div className='flex gap-2  flex-row '>
 
-                                    <label className='text-lg mt-2'>Applied Date<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                                    <div className='flex'>
-                                        <input
-                                            type="text"
-                                            name=""
-                                            datepicker
-                                            id=""
-                                            value={values.applied_date ? new Date(values.applied_date).toLocaleDateString('en-GB', {
-                                                day: '2-digit',
-                                                month: '2-digit',
-                                                year: 'numeric'
-                                            }) : 'Select Date...'}
-                                            readOnly={true}
+                                    <div className="flex flex-col flex-1">
 
-                                            className={`border border-r-0  border-black px-2 py-1 text-black w-76 outline-none rounded-md rounded-r-none mb-1`}
+                                        <label className='text-lg  3xl:text-2xl mb-1'>Applied Date<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <div className='flex'>
+                                            <input
+                                                type="text"
+                                                name=""
+                                                datepicker
+                                                id=""
+                                                value={values.applied_date ? new Date(values.applied_date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric'
+                                                }) : 'Select Date...'}
+                                                readOnly={true}
 
-                                        />
-                                        <input
-                                            type="date"
-                                            name="applied_date"
-                                            id="applied_date"
-                                            value={''}
+                                                className={`border border-r-0  border-black px-2 py-2 w-full text-black w-76 outline-none rounded-md rounded-r-none mb-1`}
 
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
+                                            />
+                                            <input
+                                                type="date"
+                                                name="applied_date"
+                                                id="applied_date"
+                                                value={''}
 
-                                            error={showErrors && errors.applied_date && touched.applied_date}
-                                            className={`border-[1px] border-l-0 border-black px-2 py-1 text-black w-[2.3rem] outline-none rounded-md  rounded-l-none mb-1`}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
 
-                                        />
+                                                error={showErrors && errors.applied_date && touched.applied_date}
+                                                className={` border-[1px] border-l-0 border-black px-2 py-[0.60rem] text-black w-[2.4rem] select-text 3xl:w-[2.9rem] rounded-md  rounded-l-none mb-1`}
+
+                                            />
+                                        </div>
+                                        {showErrors && errors.applied_date && touched.applied_date && (
+                                            <div className="text-red-500 text-sm">{errors.applied_date}</div>
+                                        )}
                                     </div>
-                                    {showErrors && errors.applied_date && touched.applied_date && (
-                                        <div className="text-red-500 text-sm">{errors.applied_date}</div>
-                                    )}
+                                    <div className='flex-1 flex gap-1 flex-col'>
+
+                                        <label className='text-lg  3xl:text-2xl'>Status<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <div className="flex gap-5">
+
+                                            <select
+                                                name="status"
+                                                id="status"
+                                                onBlur={handleBlur}
+                                                onChange={handleChange}
+                                                value={values.status ? values.status : ''}
+                                                className={`border-[1px] border-black px-2 py-[.65rem] w-full 3xl:text-2xl rounded-md ${showErrors && errors.status && touched.status ? 'border-red-500' : ''
+                                                    }`}
+                                            >
+                                                <option value=''>Select one...</option>
+                                                <option value="Hired">Hired</option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
+
+                                        </div>
+                                        {showErrors && errors.status && touched.status && (
+                                            <div className="text-red-500 text-sm">{errors.status}</div>
+                                        )}
+                                    </div>
                                 </div>
 
-                                <Templetes remarks={remarks} setRemarks={setRemarks} />
+                                <div className='mt-4 flex flex-col gap-2' >
+                                    <div className="flex justify-between items-end">
+                                        <label htmlFor="remarks" className='text-lg mb-2'>Remarks/Comments</label>
+                                        <Templetes remarks={remarks} setRemarks={setRemarks} />
 
-                                <div className='mt-4 flex flex-col'>
-                                    <label htmlFor="remarks" className='text-lg mb-2'>Remarks/Comments</label>
+                                    </div>
                                     <textarea
-                                        className={`border-[1px] border-gray-700 h-16 w-full p-1 resize-none rounded-md outline-none ${errors.remarks && touched.remarks ? 'border-red-500' : ''
+                                        className={`border-[1px] 3xl:text-2xl border-black 3xl:h-36 sm:h-24 w-full p-1 resize-none rounded-md outline-none ${errors.remarks && touched.remarks ? 'border-red-500' : ''
                                             }`}
                                         name="remarks"
                                         id="remarks"
@@ -688,89 +693,99 @@ const EditEntryForm = ({ setAlert, setShowEditForm, showEditForm, setData, id, c
                                 </div>
                                 <div className="flex justify-center">
 
-                                    <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Edit" onClick={handleEditEntry} />
+                                    <input className='bg-[#1c75bc] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Update" onClick={handleEditEntry} />
                                 </div>
                             </div>
                             :
                             // Users Edit form
-                            <div className='flex flex-col text-black  h-[75vh] px-4 overflow-y-scroll custom-scrollbar' >
-                                <TextInput
-                                    label="Name"
-                                    isImportant
-                                    type="text"
-                                    name="name"
-                                    border='border-[1px] border-gray-800'
-                                    placeholder="Name"
-                                    value={values.name}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    error={showErrors && errors.name && touched.name }
-                                    errormessage={errors.name}
-                                />
+                            <div className='flex flex-col text-black  h-fit px-4 font-normal' >
 
-                                <TextInput
-                                    isImportant
-                                    label="Email"
-                                    type="text"
-                                    name="email"
-                                    border='border-[1px] border-gray-800'
-                                    placeholder="Email"
-                                    value={values.email}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    error={showErrors && errors.email && touched.email }
-                                    errormessage={errors.email}
-                                />
+                                <div className="flex gap-2 justify-center">
 
-                                <label className='text-lg mb-2'>Role<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                                <select
-                                    className={`border-[1px] px-2 border-gray-500 w-40 py-2 rounded-md mb-2 ${errors.gender && touched.gender ? 'border-red-500' : ''
-                                        }`}
-                                    name="role"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.role}
-                                >
-                                    <option value="">Select one...</option>
-                                    <option value="HR">HR</option>
-                                    <option value="employee">employee</option>
-                                </select>
-                                {showErrors && errors.role && touched.role && (
-                                    <div className="text-red-500 text-sm">{errors.role}</div>
-                                )}
+                                    <TextInput
+                                        label="Name"
+                                        isImportant
+                                        type="text"
+                                        name="name"
+                                        border='border-[1px] border-gray-800'
+                                        placeholder="Name"
+                                        value={values.name}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={showErrors && errors.name && touched.name}
+                                        errormessage={errors.name}
+                                    />
 
-                                <TextInput
-                                    label="Password"
-                                    type="password"
-                                    name="password"
-                                    border='border-[1px] border-gray-800'
-                                    placeholder="Password"
-                                    value={values.password}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    error={showErrors && errors.password && touched.password }
-                                    errormessage={errors.password}
-                                />
-                                <TextInput
-                                    label="Confirm Password"
-                                    type="password"
-                                    name="confirmPassword"
-                                    border='border-[1px] border-gray-800'
-                                    placeholder="Confirm Password"
-                                    value={values.confirmPassword}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    error={showErrors && errors.confirmPassword && touched.confirmPassword }
-                                    errormessage={errors.confirmPassword}
-                                />
+                                    <TextInput
+                                        isImportant
+                                        label="Email"
+                                        type="text"
+                                        name="email"
+                                        border='border-[1px] border-gray-800'
+                                        placeholder="Email"
+                                        value={values.email}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={showErrors && errors.email && touched.email}
+                                        errormessage={errors.email}
+                                    />
+                                </div>
+
+                                <div className="flex gap-2 justify-center">
+
+                                    <TextInput
+                                        label="Password"
+                                        type="password"
+                                        name="password"
+                                        border='border-[1px] border-gray-800'
+                                        placeholder="Password"
+                                        value={values.password}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={showErrors && errors.password && touched.password}
+                                        errormessage={errors.password}
+                                    />
+                                    <TextInput
+                                        label="Confirm Password"
+                                        type="password"
+                                        name="confirmPassword"
+                                        border='border-[1px] border-gray-800'
+                                        placeholder="Confirm Password"
+                                        value={values.confirmPassword}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={showErrors && errors.confirmPassword && touched.confirmPassword}
+                                        errormessage={errors.confirmPassword}
+                                    />
+                                </div>
+                                <div className="flex justify-center flex-col items-center gap-1  ">
+
+                                    <label className='text-lg mr-[7rem] '>Role<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                    <select
+                                        className={`border-[1px] px-2 border-gray-500 w-40 py-2 rounded-md mb-2 ${errors.gender && touched.gender ? 'border-red-500' : ''
+                                            }`}
+                                        name="role"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.role}
+                                    >
+                                        <option value="">Select one...</option>
+                                        <option value="HR">HR</option>
+                                        <option value="Data Entry">Data Entry</option>
+                                    </select>
+                                    {showErrors && errors.role && touched.role && (
+                                        <div className="text-red-500 text-sm">{errors.role}</div>
+                                    )}
+                                </div>
+
                                 <div className="flex justify-center">
 
-                                    <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={handleEditEntry} />
+                                    <input className='bg-[#1c75bc] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-1/3 self-end rounded-full my-3 hover:bg-blue-400' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={handleEditEntry} />
                                 </div>
                             </div>
                         }
                         {
-                            
+
                         }
                     </div>
                 </div>

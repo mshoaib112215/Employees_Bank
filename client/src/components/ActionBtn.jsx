@@ -80,7 +80,7 @@ const ActionBtn = ({ entryId, clicked, index, setClicked, mouseX, display, side,
 
             </div>
             {showDeleteConfirmation && (
-                <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter">
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter">
                     <div className="bg-white rounded-lg p-4">
                         <p className="mb-4">Are you sure you want to delete this entry?</p>
                         <div className="flex justify-end">

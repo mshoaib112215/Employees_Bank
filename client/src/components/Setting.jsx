@@ -198,7 +198,7 @@ const Setting = ({ setAlert }) => {
                         <>
                             <div className="flex justify-end ">
 
-                            <button className='bg-[#26b0ff] px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd(!clickAdd)}>Add New</button>
+                            <button className='bg-[#1c75bc] px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd(!clickAdd)}>Add New</button>
                             </div>
                             <div className="flex justify-center">
 
@@ -249,7 +249,7 @@ const Setting = ({ setAlert }) => {
                         <>
                             <div className="flex justify-end">
 
-                            <button className='bg-[#26b0ff]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd2(!clickAdd2)}>Add New</button>
+                            <button className='bg-[#1c75bc]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd2(!clickAdd2)}>Add New</button>
                             </div>
                             <div className="flex justify-center">
 
@@ -306,7 +306,7 @@ const Setting = ({ setAlert }) => {
                         <>
                             <div className="flex justify-end">
 
-                            <button className='bg-[#26b0ff]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd3(!clickAdd3)}>Add New</button>
+                            <button className='bg-[#1c75bc]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd3(!clickAdd3)}>Add New</button>
                             </div>
                             <div className="flex justify-center">
 
@@ -359,7 +359,7 @@ const Setting = ({ setAlert }) => {
                 </div>
 
                 {clickAdd &&
-                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter">
+                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter">
                         <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative custom-shadow">
                             <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setClickAdd(!clickAdd)}>
                                 <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -384,14 +384,14 @@ const Setting = ({ setAlert }) => {
                                 />
                             </div>
                             <div className="self-end w-full flex justify-center">
-                                <button className='bg-[#26b0ff] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAdd}>Add</button>
+                                <button className='bg-[#1c75bc] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAdd}>Add</button>
                             </div>
                         </div>
                     </div>
 
                 }
                 {clickAdd2 &&
-                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter">
+                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter">
                         <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative custom-shadow">
                             <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setClickAdd2(!clickAdd2)}>
                                 <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -417,14 +417,14 @@ const Setting = ({ setAlert }) => {
                                 />
                             </div>
                             <div className="self-end w-full flex justify-center">
-                                <button className='bg-[#26b0ff] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAddEmployee}>Add</button>
+                                <button className='bg-[#1c75bc] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAddEmployee}>Add</button>
                             </div>
                         </div>
                     </div>
 
                 }
                 {clickAdd3 &&
-                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter">
+                    <div className="fixed inset-0 pt-[30vh] pb-6 flex justify-center  bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter">
                         <div className="bg-white  rounded-lg p-4 w-screen mx-5 h-fit sm:w-1/2 relative custom-shadow" >
                             <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setClickAdd3(!clickAdd3)}>
                                 <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -457,7 +457,7 @@ const Setting = ({ setAlert }) => {
                                 ></textarea>
                             </div>
                             <div className="self-end w-full flex justify-center">
-                                <button className='bg-[#26b0ff] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAddTemplate}>Add</button>
+                                <button className='bg-[#1c75bc] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAddTemplate}>Add</button>
                             </div>
                         </div>
                     </div>

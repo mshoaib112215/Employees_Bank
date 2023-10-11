@@ -83,7 +83,7 @@ const Login = ({ setAlert }) => {
 
 
       <div className="flex w-screen bg-image h-screen justify-center items-center">
-        <div className="sm:w-1/3 w-11/12 h-100 bg-gray-200 shadow-md text p-5 rounded-lg backdrop-blur-md  bg-opacity-40 " style={{ boxShadow: "#00000069 2px 2px 20px 9px" }} >
+        <div className="sm:w-1/3 w-11/12 h-100 bg-gray-200 shadow-md text p-5 rounded-3xl backdrop-blur-md  bg-opacity-40 " style={{ boxShadow: "#00000069 2px 2px 20px 9px" }} >
           {!loading ?
             <>
               <img src={fullLogo} alt="Candi Track" />
@@ -113,7 +113,7 @@ const Login = ({ setAlert }) => {
                   error={showErrors && errors.password && touched.password}
                   errormessage={errors.password} />
 
-                <input type="submit" className="p-3 hover:bg-[#1c75bc] duration-500 w-1/2 text-white text-lg self-center rounded-lg  my-3 bg-[#fbb040] transition-all ease-in-out" value="Login" onClick={handleLogin} />
+                <input type="submit" className="p-3 hover:bg-[#1c75bc] duration-500 w-1/2 text-white text-lg self-center rounded-full  my-3 bg-[#fbb040] transition-all ease-in-out" value="Login" onClick={handleLogin} />
               </div>
             </>
             :

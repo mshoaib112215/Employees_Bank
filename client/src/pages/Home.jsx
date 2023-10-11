@@ -194,7 +194,7 @@ const Home = ({ once, setOnce }) => {
             </h1>
             <div className="flex justify-evenly sm:flex-row flex-col gap-7 ">
 
-                <div className='flex-1 flex flex-col items-center shadow-md p-6 pt-3 h-32 text-lg md:text-2xl sm:text-xl border-none rounded-3xl  bg-white font-semibold'>
+                <div className='flex-1 flex flex-col items-center custom-shadow p-6 pt-3 h-32 text-lg md:text-2xl sm:text-xl border-none rounded-3xl  bg-white font-semibold'>
 
                     {isLoading ?
                         <Loader isTransparent={true} />
@@ -218,7 +218,7 @@ const Home = ({ once, setOnce }) => {
                         )}
 
                 </div>
-                <div className='flex-1 flex flex-col items-center shadow-md p-6 pt-3 h-32 text-lg md:text-2xl sm:text-xl border-none rounded-3xl   bg-white font-semibold'>
+                <div className='flex-1 flex flex-col items-center custom-shadow p-6 pt-3 h-32 text-lg md:text-2xl sm:text-xl border-none rounded-3xl   bg-white font-semibold'>
 
 
                     {isLoading ?
@@ -245,7 +245,7 @@ const Home = ({ once, setOnce }) => {
                             </div>
                         )}
                 </div>
-                <div className='flex-1 flex flex-col items-center shadow-md p-6 pt-3 h-32 text-lg md:text-2xl sm:text-xl border-none rounded-3xl   bg-white font-semibold'>
+                <div className='flex-1 flex flex-col items-center custom-shadow p-6 pt-3 h-32 text-lg md:text-2xl sm:text-xl border-none rounded-3xl   bg-white font-semibold'>
 
 
                     {isLoading ?

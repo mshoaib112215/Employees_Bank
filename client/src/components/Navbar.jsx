@@ -279,7 +279,7 @@ const Navbar = ({ setAlert }) => {
 
                   <div className="flex justify-center">
 
-                  <input className='bg-[#26b0ff] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-[20%] self-end rounded-full my-3 hover:bg-blue-400 outline-none border-none' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={() => { setSaveClicked(true); setProfileClick2(false) }} />
+                  <input className='bg-[#1c75bc] disabled:bg-gray-500 disabled:cursor-not-allowed text-white p-2 w-[20%] self-end rounded-full my-3 hover:bg-blue-400 outline-none border-none' type="submit" disabled={values.name == '' > 0 ? true : false} value="Submit" onClick={() => { setSaveClicked(true); setProfileClick2(false) }} />
                   </div>
                 </div>
               </div>
@@ -291,7 +291,7 @@ const Navbar = ({ setAlert }) => {
         </>
       }
       {saveClicked && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter">
           <div className="bg-white rounded-lg p-4">
             <p className="mb-4">After saving you will be redirected to login again. Are you sure you want to Save them?</p>
             <div className="flex justify-end">

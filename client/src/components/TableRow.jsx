@@ -180,15 +180,15 @@ const TableRow = ({ entry, setClicked, index, users = false, isEmployee, checkAl
                     <td className="p-4 whitespace-nowrap ">{entry.type}</td>
                     <td className="p-4 whitespace-nowrap ">{entry.status}</td>
                     <td className="p-4 whitespace-nowrap ">{creatorName}</td>
-                    <td className="p-4 whitespace-nowrap ">{date} <span className='p-1 rounded-md bg-[#26b0ff] uppercase text-white'>{time}</span></td>
+                    <td className="p-4 whitespace-nowrap ">{date} <span className='p-1 rounded-md bg-[#1c75bc] uppercase text-white'>{time}</span></td>
                     <td className="p-4 whitespace-nowrap ">{entry_date} </td>
                 </tr>
                 :
                 <tr className='relative cursor-pointer' onClick={() => setClicked(index)}>
                     <td className="p-4 whitespace-nowrap ">{entry.name}</td>
-                    <td className="p-4 whitespace-nowrap ">{entry.username}</td>
+                    <td className="p-4 whitespace-nowrap normal-case">{entry.username}</td>
                     <td className="p-4 whitespace-nowrap  lowercase">{entry.email}</td>
-                    <td className="p-4 whitespace-nowrap  "><span className={`p-1 rounded-md ${entry.role === 'HR' ? 'bg-[#ffd600]' : entry.role === 'admin' ? 'bg-green-600' : 'bg-[#26b0ff]'} capitalize text-white`}>{entry.role}</span></td>
+                    <td className="p-4 whitespace-nowrap font-normal "><span className={`p-1 rounded-md ${entry.role === 'HR' ? 'bg-[#fbb040]' : entry.role === 'admin' ? 'bg-green-600' : 'bg-[#1c75bc]'} capitalize text-white`}>{entry.role}</span></td>
                 </tr>}
 
 

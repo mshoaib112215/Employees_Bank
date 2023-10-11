@@ -24,11 +24,6 @@ const Sidebar = ({ side, setSide, display, setDisplay, setAlert }) => {
 
             Dashboard
               </p>
-              <p>
-                  <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 12L31 24L19 36" />
-                  </svg>
-              </p>
           </span>
         </NavLink>}
         {role == 'admin' && <NavLink title="Users" to={"/users"} className="flex items-center gap-3 p-2 hover:text-[#f3f3f3] transition-all font-semibold">
@@ -40,11 +35,7 @@ const Sidebar = ({ side, setSide, display, setDisplay, setAlert }) => {
 
                 Users
               </p>
-              <p>
-                <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 12L31 24L19 36" />
-                </svg>
-              </p>
+              
             </span>
         </NavLink>}
 
@@ -57,11 +48,7 @@ const Sidebar = ({ side, setSide, display, setDisplay, setAlert }) => {
 
                 Data Entry
               </p>
-              <p>
-                <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 12L31 24L19 36" />
-                </svg>
-              </p>
+              
             </span>
         </NavLink>
 
@@ -75,11 +62,7 @@ const Sidebar = ({ side, setSide, display, setDisplay, setAlert }) => {
 
                 Records
               </p>
-              <p>
-                <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 12L31 24L19 36" />
-                </svg>
-              </p>
+              
             </span>
         </NavLink>}
         
@@ -95,11 +78,7 @@ const Sidebar = ({ side, setSide, display, setDisplay, setAlert }) => {
 
                     Settings
                   </p>
-                  <p>
-                    <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                      <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 12L31 24L19 36" />
-                    </svg>
-                  </p>
+                  
                 </span>
             </NavLink>
            

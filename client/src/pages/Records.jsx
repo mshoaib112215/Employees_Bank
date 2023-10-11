@@ -51,7 +51,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
 
   // Pagination loginc
   const [recordsPerPage, setRecordsPerPage] = useState(10); // Default value
-  const pageCount = Math.ceil(sortedData.length / recordsPerPage);
+  
 
   const [currentPage, setCurrentPage] = useState(0);
   const offset = currentPage * recordsPerPage;
@@ -152,7 +152,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
 
     );
   });
-
+  const pageCount = Math.ceil(filteredRecords.length / recordsPerPage);
   const clearSerach = () => {
     setSearchText('');
     setCity('');
@@ -230,11 +230,11 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
 
             <div className='flex items-center mb-4 '>
 
-              <button className="bg-[#26b0ff] px-3 py-2 hover:bg-blue-400 text-white rounded-full" onClick={() => setIsAddClicked(!isAddClicked)}>Add Entry</button>
+              <button className="bg-[#1c75bc] px-3 py-2 w-52 h-12 hover:bg-blue-400 text-white rounded-full" onClick={() => setIsAddClicked(!isAddClicked)}>Add Record</button>
             </div>
           </div>
         </div>
-        <div className="flex mb-4 items-end flex-wrap gap-3 text-lg  text-[#6e6e6e] outline-none">
+        <div className="flex mb-4 items-end flex-wrap gap-2 text-lg   outline-none">
           {showFilters ?
             <>
               <div className='flex flex-col gap-2 animate-expand outline-none'>
@@ -318,13 +318,13 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
             disabled={isAddClicked ? true : false}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <button className='flex cursor-pointer gap-2 bg-[#26b0ff] text-white p-1 text-sm border-none rounded-md' onClick={() => clearSerach()}>
-            <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fill="#fff" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />
-            </svg>
+          <button className='flex cursor-pointer gap-2 underline p-1 text-gray-500 hover:text-[#1c75bc] text-sm border-none rounded-md' onClick={() => clearSerach()}>
+            {/* <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#000" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z" />
+            </svg> */}
             Clear Filters
           </button>
-          <div className='mb-1'>
+          <div className='mb-1 flex-1 text-end'>
             <h2>Total Records: <span className='font-semibold'>{searchText.length > 0 || searching ? filteredRecords.length : sortedData.length}</span></h2>
 
           </div>
@@ -333,7 +333,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
         {role == 'admin' && <button disabled={selectedValues.length === 0} className='flex cursor-pointer gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed bg-red-600 text-white p-1 text-sm border-none rounded-md mb-3' onClick={() => setDeleteSelectedRecordsClick(true)}>Delete selected records</button>}
 
         <div className="overflow-x-auto text-lg capitalize rounded-xl custom-shadow">
-          <table className="min-w-full whitespace-nowrap text-[14px] 3xl:text-[15px] text-left">
+          <table className="min-w-full whitespace-nowrap text-[14px] 3xl:text-[15px] text-left  font-semibold">
             <thead>
               <tr className="bg-gray-50 ">
                 {role == 'admin' && <th className="px-4 py-2"><input type="checkbox" checked={checkAllClick} className='pl-5 custom-checkbox' onClick={() => setCheckAllClick(!checkAllClick)} /></th>}
@@ -392,10 +392,24 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
 
         {/* Pagination component */}
 
-        <div className="flex justify-center gap-3  sm:justify-between items-center mt-4 flex-wrap">
+        <div className="flex justify-center gap-3  sm:justify-end items-center mt-4 flex-wrap">
           <p className='mr-2'>
-            Showing {currentPage + 1} of {pageCount}
+            Showing {currentPage + 1} of {pageCount} Pages
           </p>
+         
+          <ReactPaginate
+            previousLabel={'Previous'}
+            nextLabel={'Next'}
+            breakLabel={''}
+            pageCount={pageCount}
+            onPageChange={handlePageChange}
+            containerClassName={'flex gap-2 flex-wrap select-none'}
+            pageClassName={'hidden'}
+            previousClassName={'px-3 py-1 flex-wrap bg-white border rounded-lg cursor-pointer'}
+            nextClassName={'px-3 bg-white py-1 border flex-wrap rounded-lg cursor-pointer'}
+            activeClassName={'!bg-[#1c75bc] text-white'}
+            disabledClassName={'text-gray-300 cursor-not-allowed'}
+          />
           <div className="flex items-center ">
             <span className="mr-2">Records per page:</span>
 
@@ -413,19 +427,6 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
               {/* Add more options as needed */}
             </select>
           </div>
-          <ReactPaginate
-            previousLabel={'Previous'}
-            nextLabel={'Next'}
-            breakLabel={''}
-            pageCount={pageCount}
-            onPageChange={handlePageChange}
-            containerClassName={'flex gap-2 flex-wrap select-none'}
-            pageClassName={'hidden'}
-            previousClassName={'px-3 py-1 flex-wrap bg-white border rounded-lg cursor-pointer'}
-            nextClassName={'px-3 bg-white py-1 border flex-wrap rounded-lg cursor-pointer'}
-            activeClassName={'!bg-[#26b0ff] text-white'}
-            disabledClassName={'text-gray-300 cursor-not-allowed'}
-          />
         </div>
       </div>
       {/* Add entry form */}
@@ -434,7 +435,7 @@ const Records = ({ display, side, setAlert, isAddClicked, setIsAddClicked }) => 
         <AddEntryForm setAlert={setAlert} isAddClicked={isAddClicked} setIsAddClicked={setIsAddClicked} setEmployeeData={setEmployeeData} />
       )}
       {deleteSelectedRecordsClick && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-[100]">
           <div className="bg-white rounded-lg p-4">
             <p className="mb-4">Are you sure you want to delete this entry?</p>
             <div className="flex justify-end">

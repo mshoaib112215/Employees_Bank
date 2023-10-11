@@ -154,7 +154,6 @@ const Dashboard = ({ setAlert }) => {
             try {
                 let res
                 if (storeEmployeesType.length === 0) {
-
                     res = await getTemplates();
                     dispatch(setTemplates(res.data.result))
                 }
@@ -171,7 +170,6 @@ const Dashboard = ({ setAlert }) => {
 
     return (
         <>
-
             <Sidebar setAlert={setAlert} side={side} setSide={setSide} display={display} setDisplay={setDisplay} />
             <Navbar setAlert = {setAlert}/>
             <div className={`flex ${!display && "!ml-0"} ${side ? "ml-16" : "ml-[12.7rem] 3xl:ml-[12rem]"} sm:p-4 p-1 sm:pt-16 pt-16  bg-[#e8e8e880]  h-full bottom-0`}>
@@ -180,7 +178,8 @@ const Dashboard = ({ setAlert }) => {
                     {role == 'admin' && <Route path="/users" element={<Users display={display} side={side} setAlert={setAlert} isAddClicked={isAddClicked} setIsAddClicked={setIsAddClicked} />} />}
                     {role == 'admin' && <Route path="/settings" element={<SettingPage setAlert={setAlert} />} />}
                     {(role == 'admin' || role == 'HR') && <Route path="/records" element={<Records display={display} side={side} setAlert={setAlert} isAddClicked={isAddClicked} setIsAddClicked={setIsAddClicked} />} />}
-                    <Route path="/logout" element={<div className={`fixed  inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter`}>
+                    <Route path="/logout" element={
+                    <div className={`fixed  inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter`}>
                         <div className="bg-white rounded-lg p-4">
                             <p className="mb-4">Are you sure you want to logout?</p>
                             <div className="flex justify-end">

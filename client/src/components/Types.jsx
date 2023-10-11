@@ -137,7 +137,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                 </div>
             </div>
             {deleted && (
-                <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter">
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter">
                     <div className="bg-white rounded-lg p-4">
                         <p className="mb-4"><span className='font-semibold'>{`${!isTempalte ? (!isEmployee ? applied_fors.length  : employee_types.length ) : ''}`}</span> {`${!isTempalte ? 'entries are associated with it.':''} `}Are you sure you want to delete this entry?</p>
                         <div className="flex justify-end">
@@ -148,7 +148,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                 </div>
             )}
             {edit ? (
-                <div className="fixed inset-0 pt-20 pb-6 flex justify-center items-center bg-gray-500 bg-opacity-50 z-20 backdrop-blur-md backdrop-filter" >
+                <div className="fixed inset-0 pt-20 pb-6 flex justify-center items-center bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter" >
                     <div className="bg-white rounded-3xl p-4 pb-10 w-[80vw] sm:w-1/2 h-fit  relative custom-shadow">
                         <button className="rounded-full absolute text-3xl top-[.5rem] right-[.5rem]  bg-red-600 p-2 w-10 h-10 flex justify-center items-center " onClick={() => setEdit(false)}>
                             <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -156,7 +156,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                             </svg>
                         </button>
 
-                        <h2 className="mb-4 3xl:text-4xl text-3xl">Edit Template</h2>
+                        <h2 className="mb-4 3xl:text-4xl text-2xl">Edit Template</h2>
 
                         <div>
                             <div className='flex 3xl:text-2xl text-black flex-col h-auto px-4  overflow-y-scroll custom-scrollbar' >

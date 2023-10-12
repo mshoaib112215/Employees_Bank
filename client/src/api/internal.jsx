@@ -405,7 +405,7 @@ export const deleteAllRec = async (data) => {
                 // Check if the refresh was successful
                 if (refreshResponse.status === 200) {
                     // Retry the original request with the new token
-                    deleteEntry(id);
+                    deleteAllRec(data);
                 }
                 else {
 

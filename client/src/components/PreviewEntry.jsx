@@ -36,7 +36,7 @@ const PreviewEntry = ({ setPreviewClicked, currentRecords, previewClicked, id })
                         </svg>
                     </button>
 
-                    <h2 className="mb-4 text-3xl">Entry Preview</h2>
+                    <h2 className="mb-4 text-2xl">Entry Preview</h2>
                     <div className=''>
                         {record?.map((entry, index) => (
                             <div key={index}>

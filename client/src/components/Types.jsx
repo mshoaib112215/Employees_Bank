@@ -12,6 +12,8 @@ import { deleteTemplates, updateTemplate } from '../store/templatesSlice'
 import { deleteSelected } from '../store/employeeSlice'
 
 const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = false }) => {
+    const [saving, setSaving] = useState(false);
+
     const [deleted, setDeleted] = useState(false)
     const dispatch = useDispatch();
     const [edit, setEdit] = useState(false)
@@ -26,7 +28,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
 
 
     const handleUpdate = async (id) => {
-        setAlert({ message: <Loader isTransparent />, type: "loading" });
+        setSaving(true)
         let response
         try {
             const data = {
@@ -38,34 +40,38 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                 const updatedTemplate = { _id: id, ...data };
                 dispatch(updateTemplate(updatedTemplate));
                 setAlert({ message: "Updated successfully", type: "success" })
+                setSaving(false)
             }
             else {
                 setAlert({ message: "Something went wrong", type: "error" })
             }
         }
         catch (error) {
+        }
+        finally{
+            setSaving(false)
 
         }
     }
-    
+
 
     const handleDelete = async (id, assoc_entry) => {
         setDeleted(false)
-        const assoc_ids = assoc_entry.map((item)=>item._id)
+        const assoc_ids = assoc_entry.map((item) => item._id)
         setAlert({ message: <Loader isTransparent />, type: "loading" });
         let response
         try {
             if (isEmployee) {
-                
+
                 response = await deleteAllRec(assoc_ids)
-                if(response.status !== 400){
+                if (response.status !== 400) {
                     response = await deleteEmployeeType(id);
                     dispatch(deleteEmployeeTypes(id));
                     assoc_ids.forEach(item => {
                         dispatch(deleteSelected(item))
                     });
                 }
-                else{
+                else {
                     setAlert({ message: "Internal error in deleting associated Entries", type: "error" });
                 }
             }
@@ -79,9 +85,9 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                         dispatch(deleteSelected(item))
                     });
                 }
-                else{
+                else {
                     setAlert({ message: "Internal error in deleting associated Entries", type: "error" });
-                    
+
                 }
             }
             if (!isTempalte) {
@@ -110,7 +116,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
             console.log(error);
         }
     }
-    
+
     return (
         <div className="flex justify-center">
 
@@ -120,7 +126,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                     <svg width="20" height="20" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#000000" d="M8.293 2.293a1 1 0 0 1 1.414 0l4.5 4.5a1 1 0 0 1 0 1.414l-4.5 4.5a1 1 0 0 1-1.414-1.414L11 8.5H1.5a1 1 0 0 1 0-2H11L8.293 3.707a1 1 0 0 1 0-1.414Z" />
                     </svg>
-                    <li className=' px-3 text-lg font-semibold py-2 capitalize rounded'>{type.value} {`${!isTempalte ? (!isEmployee  ? "("+applied_fors.length+")" : "("+employee_types.length+")"): ''}`}</li>
+                    <li className=' px-3 text-lg font-semibold py-2 capitalize rounded'>{type.value} {`${!isTempalte ? (!isEmployee ? "(" + applied_fors.length + ")" : "(" + employee_types.length + ")") : ''}`}</li>
                 </div>
 
                 <div className='flex gap-3 items-center'>
@@ -139,10 +145,10 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
             {deleted && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-[100] backdrop-blur-md backdrop-filter">
                     <div className="bg-white rounded-lg p-4">
-                        <p className="mb-4"><span className='font-semibold'>{`${!isTempalte ? (!isEmployee ? applied_fors.length  : employee_types.length ) : ''}`}</span> {`${!isTempalte ? 'entries are associated with it.':''} `}Are you sure you want to delete this entry?</p>
+                        <p className="mb-4"><span className='font-semibold'>{`${!isTempalte ? (!isEmployee ? applied_fors.length : employee_types.length) : ''}`}</span> {`${!isTempalte ? 'entries are associated with it.' : ''} `}Are you sure you want to delete this entry?</p>
                         <div className="flex justify-end">
                             <button className="border border-red-500 px-3 py-1 rounded-md mr-2 hover:bg-red-500 hover:text-white" onClick={() => setDeleted(false)}>Cancel</button>
-                            <button className="bg-red-500 text-white px-3  py-1 rounded-md hover:bg-red-600" onClick={() => handleDelete(type._id, !isTempalte ? (!isEmployee ? applied_fors: employee_types) : {})}>Delete</button>
+                            <button className="bg-red-500 text-white px-3  py-1 rounded-md hover:bg-red-600" onClick={() => handleDelete(type._id, !isTempalte ? (!isEmployee ? applied_fors : employee_types) : {})}>Delete</button>
                         </div>
                     </div>
                 </div>
@@ -159,26 +165,32 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                         <h2 className="mb-4 3xl:text-4xl text-2xl">Edit Template</h2>
 
                         <div>
-                            <div className='flex 3xl:text-2xl text-black flex-col h-auto px-4  overflow-y-scroll custom-scrollbar' >
-                                <TextInput
-                                    label="Name"
-                                    type="text"
-                                    name="name"
-                                    border='border-[1px]  border-gray-800'
-                                    placeholder="e.g: Suitable"
-                                    onChange={(e) => setTemplateName(e.target.value)}
-                                    value={templateName}
-                                />
-                                <label htmlFor="remarks" className='text-lg 3xl:text-2xl '>Description:</label>
-                                <textarea
-                                    className={`border-[1px] 3xl:text-2xl border-gray-700 3xl:h-36 sm:h-24 w-full p-1 resize-none rounded-md outline-none `}
-                                    name="template"
-                                    id="template"
-                                    cols="30"
-                                    rows="10"
-                                    onChange={(e) => setTemplateDesc(e.target.value)}
-                                    value={templateDesc}
-                                ></textarea>
+                            <div className='flex 3xl:text-2xl text-black flex-col h-auto px-4' >
+                                {saving ?
+
+                                    <Loader isTransparent /> :
+                                    <>
+                                        <TextInput
+                                            label="Name"
+                                            type="text"
+                                            name="name"
+                                            border='border-[1px]  border-gray-800'
+                                            placeholder="e.g: Suitable"
+                                            onChange={(e) => setTemplateName(e.target.value)}
+                                            value={templateName}
+                                        />
+                                        <label htmlFor="remarks" className='text-lg 3xl:text-2xl '>Description:</label>
+                                        <textarea
+                                            className={`border-[1px] 3xl:text-2xl border-gray-700 3xl:h-36 sm:h-24 w-full p-1 resize-none rounded-md outline-none `}
+                                            name="template"
+                                            id="template"
+                                            cols="30"
+                                            rows="10"
+                                            onChange={(e) => setTemplateDesc(e.target.value)}
+                                            value={templateDesc}
+                                        ></textarea>
+                                    </>
+                                }
                                 <div className='flex justify-center mt-3'>
 
                                     <button className='p-2 px-10 bg-blue-600 w-fit border-none outline-none rounded-full text-lg text-white' onClick={() => handleUpdate(type._id)}>Update</button>

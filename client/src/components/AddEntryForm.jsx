@@ -14,6 +14,7 @@ import Templetes from '../components/Templetes'
 
 const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData, dataEntry = false }) => {
 
+    const [saving, setSaving] = useState(false);
     const [showErrors, setShowErrors] = useState(false);
     const [remarks, setRemarks] = useState('');
     const applied_fors = useSelector((state) => state.applied_for);
@@ -304,13 +305,15 @@ const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData
         validationSchema: employeeSchema
     });
     const handleAddEntry = async (addMore = false) => {
+        setSaving(true)
         setShowErrors(true)
         if (Object.keys(errors).length > 0) {
+            setSaving(false)
+
             console.log(errors)
             setAlert({ message: "Please fill Required fields", type: "error" })
             return
         }
-
 
         setAlert({ message: <Loader isTransparent />, type: "loading" })
         //get values from form
@@ -350,6 +353,7 @@ const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData
         // function will add it to the database
         // if return 200 then okay otherwise show error
 
+        setSaving(false)
 
     }
     useEffect(() => {
@@ -374,101 +378,105 @@ const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData
                 <h2 className="mb-4 text-2xl">Add Record</h2>
                 <div>
                     <div className='flex h-[70vh] 3xl:h-auto  flex-col   px-4 overflow-y-scroll custom-scrollbar' >
-                        <div className='flex gap-2 md:flex-row flex-col '>
+                        {saving ?
 
-                        <div className='flex flex-col items-start gap-1 flex-1 w-full '>
+                            <Loader isTransparent /> :
+                            <>
+                                <div className='flex gap-2 md:flex-row flex-col '>
 
-                            <label className='text-lg 3xl:text-2xl'>Applied For<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                            <select
-                                className={`border-[1px] border-gray-500 px-2 py-[.65rem] w-full 3xl:text-2xl rounded-md ${showErrors && errors.applied_for && touched.applied_for ? 'border-red-500' : ''
-                                    }`}
-                                name="applied_for"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                value={values.applied_for}
-                            >
-                                <option value="">Select one...</option>
-                                {types.map((type) => (
-                                    <option value={type.value}>{type.value}</option>
-                                ))}
-                            </select>
-                            {showErrors && errors.applied_for && touched.applied_for && (
-                                <div className="text-red-500 text-sm">{errors.applied_for}</div>
-                            )}
-                        </div>
-                        <div className="flex flex-col flex-1">
+                                    <div className='flex flex-col items-start gap-1 flex-1 w-full '>
 
-                            <label className='text-lg  3xl:text-2xl mb-1'>Applied Date<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                            <div className='flex 3xl:text-2xl '>
-                                <input
-                                    type="text"
-                                    name=""
-                                    datepicker
-                                    id=""
-                                    value={values.applied_date ? new Date(values.applied_date).toLocaleDateString('en-GB', {
-                                        day: '2-digit',
-                                        month: '2-digit',
-                                        year: 'numeric'
-                                    }) : 'Select Date...'}
-                                    readOnly={true}
+                                        <label className='text-lg 3xl:text-2xl'>Applied For<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <select
+                                            className={`border-[1px] border-gray-500 px-2 py-[.65rem] w-full 3xl:text-2xl rounded-md ${showErrors && errors.applied_for && touched.applied_for ? 'border-red-500' : ''
+                                                }`}
+                                            name="applied_for"
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            value={values.applied_for}
+                                        >
+                                            <option value="">Select one...</option>
+                                            {types.map((type) => (
+                                                <option value={type.value}>{type.value}</option>
+                                            ))}
+                                        </select>
+                                        {showErrors && errors.applied_for && touched.applied_for && (
+                                            <div className="text-red-500 text-sm">{errors.applied_for}</div>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-col flex-1">
 
-                                    className={`border border-r-0  border-black px-2 py-2 w-full text-black w-76 outline-none rounded-md rounded-r-none mb-1`}
+                                        <label className='text-lg  3xl:text-2xl mb-1'>Applied Date<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <div className='flex 3xl:text-2xl '>
+                                            <input
+                                                type="text"
+                                                name=""
+                                                datepicker
+                                                id=""
+                                                value={values.applied_date ? new Date(values.applied_date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric'
+                                                }) : 'Select Date...'}
+                                                readOnly={true}
 
-                                />
+                                                className={`border border-r-0  border-black px-2 py-2 w-full text-black w-76 outline-none rounded-md rounded-r-none mb-1`}
 
-                                <input
-                                    type="date"
-                                    name="applied_date"
-                                    id="applied_date"
-                                    value={''}
+                                            />
 
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                            <input
+                                                type="date"
+                                                name="applied_date"
+                                                id="applied_date"
+                                                value={''}
 
-                                    error={showErrors && errors.applied_date && touched.applied_date}
-                                    className={` border-[1px] border-l-0 border-black px-2 py-[0.60rem] text-black w-[2.4rem] select-text 3xl:w-[2.9rem] rounded-md  rounded-l-none mb-1`}
-                                />
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
 
-                            </div>
-                            {showErrors && errors.applied_date && touched.applied_date && (
-                                <div className="text-red-500 text-sm">{errors.applied_date}</div>
-                            )}
-                        </div>
-                        </div>
+                                                error={showErrors && errors.applied_date && touched.applied_date}
+                                                className={` border-[1px] border-l-0 border-black px-2 py-[0.60rem] text-black w-[2.4rem] select-text 3xl:w-[2.9rem] rounded-md  rounded-l-none mb-1`}
+                                            />
 
-                        <div className='flex gap-2 md:flex-row flex-col '>
+                                        </div>
+                                        {showErrors && errors.applied_date && touched.applied_date && (
+                                            <div className="text-red-500 text-sm">{errors.applied_date}</div>
+                                        )}
+                                    </div>
+                                </div>
 
-                            <TextInput
-                                label="Name"
-                                isImportant
-                                placeholder="Name"
-                                autoFocus
-                                type="text"
-                                name="name"
-                                border='border-[1px] border-gray-800 '
-                                value={values.name}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                error={showErrors && errors.name && touched.name}
-                                errormessage={errors.name}
-                            />
-                            <TextInput
-                                label="Email"
-                                isImportant
-                                placeholder="abc@example.com"
-                                type="text"
-                                name="email"
-                                border='border-[1px] border-gray-800'
-                                value={values.email}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                error={showErrors && errors.email && touched.email}
-                                errormessage={errors.email}
-                            />
-                        </div>
-                        <div className='flex gap-2 md:flex-row flex-col '>
+                                <div className='flex gap-2 md:flex-row flex-col '>
 
-                            {/* <CityDropdown
+                                    <TextInput
+                                        label="Name"
+                                        isImportant
+                                        placeholder="Name"
+                                        autoFocus
+                                        type="text"
+                                        name="name"
+                                        border='border-[1px] border-gray-800 '
+                                        value={values.name}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={showErrors && errors.name && touched.name}
+                                        errormessage={errors.name}
+                                    />
+                                    <TextInput
+                                        label="Email"
+                                        isImportant
+                                        placeholder="abc@example.com"
+                                        type="text"
+                                        name="email"
+                                        border='border-[1px] border-gray-800'
+                                        value={values.email}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={showErrors && errors.email && touched.email}
+                                        errormessage={errors.email}
+                                    />
+                                </div>
+                                <div className='flex gap-2 md:flex-row flex-col '>
+
+                                    {/* <CityDropdown
                                 label="City"
                                 isImportant
                                 cities={["bwp", "sama"]}
@@ -483,161 +491,161 @@ const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData
                                 errormessage={errors.city}
                             /> */}
 
-                            <div className='flex flex-col flex-1'>
-                                <label className='text-gray-900 text-lg 3xl:text-2xl mb-1'>City<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                                {/* <CityDropdown options={optionList} selectedOption={values.city} onChange={handleChange} onBlur = {handleBlur}/> */}
-                                <Select
-                                    options={optionList}
-                                    name='city'
-                                    placeholder={"Select City"}
-                                    value={values.city ? optionList.find(option => option.value === values.city) : ''}
-                                    onChange={handleSelectChange}
-                                    onBlur={handleBlur}
-                                    isSearchable={true}
-                                    styles={{
-                                        control: (provided, state) => ({
-                                            ...provided,
-                                            border: '1px solid black',
-                                            height: '110%',
-                                            borderRadius: '7px',
-                                            fontSize: '18px',
-                                            ":focus": {
-                                                border: 'none'
-                                            }
+                                    <div className='flex flex-col flex-1'>
+                                        <label className='text-gray-900 text-lg 3xl:text-2xl mb-1'>City<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        {/* <CityDropdown options={optionList} selectedOption={values.city} onChange={handleChange} onBlur = {handleBlur}/> */}
+                                        <Select
+                                            options={optionList}
+                                            name='city'
+                                            placeholder={"Select City"}
+                                            value={values.city ? optionList.find(option => option.value === values.city) : ''}
+                                            onChange={handleSelectChange}
+                                            onBlur={handleBlur}
+                                            isSearchable={true}
+                                            styles={{
+                                                control: (provided, state) => ({
+                                                    ...provided,
+                                                    border: '1px solid black',
+                                                    height: '110%',
+                                                    borderRadius: '7px',
+                                                    fontSize: '18px',
+                                                    ":focus": {
+                                                        border: 'none'
+                                                    }
 
-                                        }),
-                                        select: (provided, state) => ({
-                                            ...provided,
-                                            outline: 'none',
-                                        }),
-                                        option: (provided, state) => ({
-                                            ...provided,
-                                            padding: '2px', // Adjust padding as needed
-                                            paddingLeft: '10px',
-                                            marginTop: '2px',
-                                            background: state.isSelected ? 'gray' : 'white', // Change background color when selected
-                                            color: state.isSelected ? 'white' : 'black',
-                                            ':hover': {
-                                                background: 'gray', // Change background color on hover
-                                                cursor: 'pointer', // Change cursor on hover
-                                                color: 'white'
-                                            },
+                                                }),
+                                                select: (provided, state) => ({
+                                                    ...provided,
+                                                    outline: 'none',
+                                                }),
+                                                option: (provided, state) => ({
+                                                    ...provided,
+                                                    padding: '2px', // Adjust padding as needed
+                                                    paddingLeft: '10px',
+                                                    marginTop: '2px',
+                                                    background: state.isSelected ? 'gray' : 'white', // Change background color when selected
+                                                    color: state.isSelected ? 'white' : 'black',
+                                                    ':hover': {
+                                                        background: 'gray', // Change background color on hover
+                                                        cursor: 'pointer', // Change cursor on hover
+                                                        color: 'white'
+                                                    },
 
-                                        })
+                                                })
 
-                                    }}
-                                />
-                                {showErrors && errors.city && touched.city && (
-                                    <div className="text-red-500 text-sm">{errors.city}</div>
-                                )}
-                            </div>
-                            <TextInput
-                                label="Phone Number"
-                                isImportant
-                                type="text"
-                                placeholder="xxxx-xxxxxxx"
-
-                                name="phone_no"
-                                border='border-[1px] border-gray-800'
-                                value={values.phone_no}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                error={showErrors && errors.phone_no && touched.phone_no}
-                                errormessage={errors.phone_no}
-                            />
-                        </div>
-                        <div className='flex gap-2 md:flex-row flex-col '>
-
-
-                            <div className='flex flex-col items-start gap-1 flex-1 w-full '>
-
-
-                                <label className='text-lg 3xl:text-2xl'>Gender<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                                <select
-                                    className={`border-[1px] px-2 py-[.65rem] border-gray-500 w-full 3xl:text-2xl rounded-md mb-2 ${showErrors && errors.gender && touched.gender ? 'border-red-500' : ''
-                                        }`}
-                                    name="gender"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.gender}
-                                >
-                                    <option value="" className='py-3'>Select one...</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                {showErrors && errors.gender && touched.gender && (
-                                    <div className="text-red-500 text-sm">{errors.gender}</div>
-                                )}
-                            </div>
-                            <TextInput
-                                label="CNIC"
-                                isImportant
-                                type="text"
-                                name="cnic"
-                                border='border-[1px] border-gray-800'
-                                placeholder="xxxxx-xxxxxxx-x"
-                                value={values.cnic}
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                error={showErrors && errors.cnic && touched.cnic}
-                                errormessage={errors.cnic}
-                            />
-                            
-
-                        </div>
-                        <div className='flex gap-2 md:flex-row flex-col '>
-                           
-                            <div className='flex flex-col items-start gap-1 flex-1 w-full '>
-
-
-                                <label className='text-lg mb-0 3xl:text-2xl'>Type<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                                <select
-                                    className={`border-[1px] px-2 py-[.65rem] border-gray-500 w-full 3xl:text-2xl rounded-md ${showErrors && errors.type && touched.type ? 'border-red-500' : ''
-                                        }`}
-                                    name="type"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.type}
-                                >
-                                    <option value="">Select one...</option>
-                                    {employeeTypes.map((type) => (
-                                        <option value={type.value}>{type.value}</option>
-                                    ))}
-                                </select>
-                                {showErrors && errors.type && touched.type && (
-                                    <div className="text-red-500 text-sm">{errors.type}</div>
-                                )}
-                            </div>
-                       
-
-                            <div className='flex-1 flex gap-1 flex-col'>
-
-                                <label className='text-lg  3xl:text-2xl'>Status<span className='text-red-500 text-lg font-semibold'>*</span></label>
-                                <div className="flex gap-5">
-
-                                    <select
-                                        name="status"
-                                        id="status"
+                                            }}
+                                        />
+                                        {showErrors && errors.city && touched.city && (
+                                            <div className="text-red-500 text-sm">{errors.city}</div>
+                                        )}
+                                    </div>
+                                    <TextInput
+                                        label="Phone Number"
+                                        isImportant
+                                        type="text"
+                                        placeholder="xxxx-xxxxxxx"
+                                        autocomplete="off"
+                                        name="phone_no"
+                                        border='border-[1px] border-gray-800'
+                                        value={values.phone_no}
                                         onBlur={handleBlur}
                                         onChange={handleChange}
-                                        value={values.status ? values.status : ''}
-                                        className={`border-[1px] border-gray-500 px-2 py-[.65rem] w-full 3xl:text-2xl rounded-md ${showErrors && errors.status && touched.status ? 'border-red-500' : ''
-                                            }`}
-                                    >
-                                        <option value=''>Select one...</option>
-                                        <option value="Hired">Hired</option>
-                                        <option value="Rejected">Rejected</option>
-                                    </select>
+                                        error={showErrors && errors.phone_no && touched.phone_no}
+                                        errormessage={errors.phone_no}
+                                    />
+                                </div>
+                                <div className='flex gap-2 md:flex-row flex-col '>
+
+
+                                    <div className='flex flex-col items-start gap-1 flex-1 w-full '>
+
+
+                                        <label className='text-lg 3xl:text-2xl'>Gender<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <select
+                                            className={`border-[1px] px-2 py-[.65rem] border-gray-500 w-full 3xl:text-2xl rounded-md mb-2 ${showErrors && errors.gender && touched.gender ? 'border-red-500' : ''
+                                                }`}
+                                            name="gender"
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            value={values.gender}
+                                        >
+                                            <option value="" className='py-3'>Select one...</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Others">Others</option>
+                                        </select>
+                                        {showErrors && errors.gender && touched.gender && (
+                                            <div className="text-red-500 text-sm">{errors.gender}</div>
+                                        )}
+                                    </div>
+                                    <TextInput
+                                        label="CNIC"
+                                        isImportant
+                                        type="text"
+                                        autocomplete="off"
+                                        name="cnic"
+                                        border='border-[1px] border-gray-800'
+                                        placeholder="xxxxx-xxxxxxx-x"
+                                        value={values.cnic}
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        error={showErrors && errors.cnic && touched.cnic}
+                                        errormessage={errors.cnic}
+                                    />
+
 
                                 </div>
-                                {showErrors && errors.status && touched.status && (
-                                    <div className="text-red-500 text-sm">{errors.status}</div>
-                                )}
-                            </div>
-                        </div>
+                                <div className='flex gap-2 md:flex-row flex-col '>
+
+                                    <div className='flex flex-col items-start gap-1 flex-1 w-full '>
 
 
+                                        <label className='text-lg mb-0 3xl:text-2xl'>Type<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <select
+                                            className={`border-[1px] px-2 py-[.65rem] border-gray-500 w-full 3xl:text-2xl rounded-md ${showErrors && errors.type && touched.type ? 'border-red-500' : ''
+                                                }`}
+                                            name="type"
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            value={values.type}
+                                        >
+                                            <option value="">Select one...</option>
+                                            {employeeTypes.map((type) => (
+                                                <option value={type.value}>{type.value}</option>
+                                            ))}
+                                        </select>
+                                        {showErrors && errors.type && touched.type && (
+                                            <div className="text-red-500 text-sm">{errors.type}</div>
+                                        )}
+                                    </div>
+
+
+                                    <div className='flex-1 flex gap-1 flex-col'>
+
+                                        <label className='text-lg  3xl:text-2xl'>Status<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <div className="flex gap-5">
+
+                                            <select
+                                                name="status"
+                                                id="status"
+                                                onBlur={handleBlur}
+                                                onChange={handleChange}
+                                                value={values.status ? values.status : ''}
+                                                className={`border-[1px] border-gray-500 px-2 py-[.65rem] w-full 3xl:text-2xl rounded-md ${showErrors && errors.status && touched.status ? 'border-red-500' : ''
+                                                    }`}
+                                            >
+                                                <option value=''>Select one...</option>
+                                                <option value="Hired">Hired</option>
+                                                <option value="Rejected">Rejected</option>
+                                            </select>
+
+                                        </div>
+                                        {showErrors && errors.status && touched.status && (
+                                            <div className="text-red-500 text-sm">{errors.status}</div>
+                                        )}
+                                    </div>
+                                </div>
+                          
                         <div className='mt-4 flex flex-col gap-2' >
                             <div className="flex justify-between items-end">
 
@@ -660,6 +668,9 @@ const AddEntryForm = ({ setAlert, setIsAddClicked, isAddClicked, setEmployeeData
                                 <div className="text-red-500 text-sm">{errors.remarks}</div>
                             )}
                         </div>
+                            </>
+                        }
+
 
                         <div className='flex justify-center gap-3 text-lg 3xl:text-2xl'>
 

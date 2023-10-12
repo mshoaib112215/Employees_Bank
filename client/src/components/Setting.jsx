@@ -16,6 +16,7 @@ import { appendEmployeeType } from '../store/employeeTypeSlice'
 import { appendTemplates } from '../store/templatesSlice'
 
 const Setting = ({ setAlert }) => {
+    const [saving, setSaving] = useState(false);
     const [types, setTypes] = useState([])
     const [employeeTypes, setEmployeeTypes] = useState([])
     const [clickAdd, setClickAdd] = useState(false)
@@ -46,7 +47,7 @@ const Setting = ({ setAlert }) => {
     let filteredTypes;
     let filteredEmployeeTypes;
     let filteredTemplates;
-    
+
     // Filter the list of types based on the search query
 
     filteredTypes = types.filter(type =>
@@ -92,15 +93,26 @@ const Setting = ({ setAlert }) => {
         fetchData();
     }, []);
     const handleAdd = async () => {
-        setAlert({ message: <Loader isTransparent />, type: "loading" });
-        resetForm();
-        setClickAdd(false)
+        setShowErrors(true)
+        setSaving(true)
+
+
+        if (Object.keys(errors).length > 0 || values.value == '') {
+            console.log(Object.keys(errors).length)
+            console.log(errors.value)
+            setSaving(false)
+            setAlert({ message: "Please fill Required fields", type: "error" })
+            return
+        }
+
         try {
             const response = await addAppliedFor(values);
             if (response.status === 200) {
                 setTypes((types) => [...types, { value: values.value, _id: response.data.result._id }]);
                 dispatch(appendAppliedFor(response.data.result));
                 setAlert({ message: "Added successfully", type: "success" });
+                setClickAdd(false)
+                resetForm();
             }
             else {
 
@@ -110,19 +122,27 @@ const Setting = ({ setAlert }) => {
         catch (error) {
             console.log(error);
         }
-        setShowErrors(true);
+        setSaving(false)
     }
     const handleAddEmployee = async () => {
-        setClickAdd2(false)
-        resetForm2();
-        setAlert({ message: <Loader isTransparent />, type: "loading" });
+        setShowErrors(true)
+        setSaving(true)
+
+
+        if (Object.keys(errors2).length > 0 || values2.value == '') {
+            console.log(errors2)
+            setAlert({ message: "Please fill Required fields", type: "error" })
+            return
+        }
         try {
             const response = await addEmployeeType(values2);
             if (response.status === 200) {
                 setEmployeeTypes((types) => [...types, { value: values2.value, _id: response.data.result._id }]);
                 dispatch(appendEmployeeType(response.data.result));
-
+                
                 setAlert({ message: "Added successfully", type: "success" });
+                setClickAdd2(false)
+                resetForm2();
             }
             else {
                 setAlert({ message: "Something went wrong \"Make you are not adding duplicate value\"", type: "error" });
@@ -131,13 +151,20 @@ const Setting = ({ setAlert }) => {
         catch (error) {
             console.log(error);
         }
-        setShowErrors(true);
 
+        setSaving(false)
     }
     const handleAddTemplate = async () => {
+        setShowErrors(true)
+        setSaving(true)
 
+        if (templateName == '' || templateDesc == '') {
+            console.log(Object.keys(errors).length)
+            console.log(errors)
+            setAlert({ message: "Please fill Required fields", type: "error" })
+            return
+        }
         let response;
-        setAlert({ message: <Loader isTransparent />, type: "loading" });
 
         try {
             response = await addTemplate({ value: templateName, description: templateDesc })
@@ -157,6 +184,7 @@ const Setting = ({ setAlert }) => {
 
             setAlert({ message: "Something went wrong, Template name and description must be unique and not empty", type: "error" })
         }
+        setSaving(false)
     }
 
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -198,7 +226,7 @@ const Setting = ({ setAlert }) => {
                         <>
                             <div className="flex justify-end ">
 
-                            <button className='bg-[#1c75bc] px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd(!clickAdd)}>Add New</button>
+                                <button className='bg-[#1c75bc] px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd(!clickAdd)}>Add New</button>
                             </div>
                             <div className="flex justify-center">
 
@@ -249,7 +277,7 @@ const Setting = ({ setAlert }) => {
                         <>
                             <div className="flex justify-end">
 
-                            <button className='bg-[#1c75bc]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd2(!clickAdd2)}>Add New</button>
+                                <button className='bg-[#1c75bc]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd2(!clickAdd2)}>Add New</button>
                             </div>
                             <div className="flex justify-center">
 
@@ -306,7 +334,7 @@ const Setting = ({ setAlert }) => {
                         <>
                             <div className="flex justify-end">
 
-                            <button className='bg-[#1c75bc]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd3(!clickAdd3)}>Add New</button>
+                                <button className='bg-[#1c75bc]  px-3 py-2 hover:bg-blue-400 text-white rounded-full mb-4 ' onClick={() => setClickAdd3(!clickAdd3)}>Add New</button>
                             </div>
                             <div className="flex justify-center">
 
@@ -367,22 +395,29 @@ const Setting = ({ setAlert }) => {
                                 </svg>
                             </button>
 
-                            <h2 className="mb-4 text-3xl">Add New</h2>
+                            <h2 className="mb-4 text-2xl">Add New</h2>
                             {console.log()}
-                            <div className='flex flex-col'>
-                                <TextInput
-                                    label="Applied For:"
-                                    type="text"
-                                    name="value"
-                                    border='border-[1px] border-gray-800'
-                                    placeholder="Value"
-                                    value={values.value}
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    error={showErrors && errors.value && touched.value}
-                                    errormessage={errors.value}
-                                />
-                            </div>
+                            {saving ?
+
+                                <Loader isTransparent /> :
+                                <>
+                                    <div className='flex flex-col'>
+                                        <TextInput
+                                            label="Applied For"
+                                            isImportant
+                                            type="text"
+                                            name="value"
+                                            border='border-[1px] border-gray-800'
+                                            placeholder="Value"
+                                            value={values.value}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            error={showErrors && errors.value && touched.value}
+                                            errormessage={errors.value}
+                                        />
+                                    </div>
+                                </>
+                            }
                             <div className="self-end w-full flex justify-center">
                                 <button className='bg-[#1c75bc] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAdd}>Add</button>
                             </div>
@@ -399,23 +434,29 @@ const Setting = ({ setAlert }) => {
                                 </svg>
                             </button>
 
-                            <h2 className="mb-4 text-3xl">Add New</h2>
+                            <h2 className="mb-4 text-2xl">Add New</h2>
                             {console.log()}
-                            <div className='flex flex-col'>
-                                <TextInput
-                                    label="Employee Type"
-                                    type="text"
-                                    isImportant
-                                    name="value"
-                                    border='border-[1px] border-gray-800'
-                                    placeholder="Value"
-                                    value={values2.value}
-                                    onBlur={handleBlur2}
-                                    onChange={handleChange2}
-                                    error={showErrors && errors2.value && touched2.value}
-                                    errormessage={errors2.value}
-                                />
-                            </div>
+                            {saving ?
+
+                                <Loader isTransparent /> :
+                                <>
+                                    <div className='flex flex-col'>
+                                        <TextInput
+                                            label="Employee Type"
+                                            type="text"
+                                            isImportant
+                                            name="value"
+                                            border='border-[1px] border-gray-800'
+                                            placeholder="Value"
+                                            value={values2.value}
+                                            onBlur={handleBlur2}
+                                            onChange={handleChange2}
+                                            error={showErrors && errors2.value && touched2.value}
+                                            errormessage={errors2.value}
+                                        />
+                                    </div>
+                                </>
+                            }
                             <div className="self-end w-full flex justify-center">
                                 <button className='bg-[#1c75bc] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAddEmployee}>Add</button>
                             </div>
@@ -432,30 +473,36 @@ const Setting = ({ setAlert }) => {
                                 </svg>
                             </button>
 
-                            <h2 className="mb-4 text-3xl">Add New</h2>
+                            <h2 className="mb-4 text-2xl">Add New</h2>
                             {console.log()}
-                            <div className='flex flex-col'>
-                                <TextInput
-                                    label="Template Name"
-                                    type="text"
-                                    isImportant
-                                    name="name"
-                                    border='border-[1px] border-gray-800'
-                                    placeholder="e.g: Suitable"
-                                    value={templateName}
-                                    onChange={(e) => setTemplateName(e.target.value)}
-                                />
-                                <label htmlFor="remarks" className='text-lg 3xl:text-2xl '>Description:</label>
-                                <textarea
-                                    className={`border-[1px] 3xl:text-2xl border-gray-700 3xl:h-36 sm:h-24 w-full p-1 resize-none rounded-md outline-none `}
-                                    name="template"
-                                    id="template"
-                                    cols="30"
-                                    rows="10"
-                                    onChange={(e) => setTemplateDesc(e.target.value)}
-                                    value={templateDesc}
-                                ></textarea>
-                            </div>
+                            {saving ?
+
+                                <Loader isTransparent /> :
+                                <>
+                                    <div className='flex flex-col'>
+                                        <TextInput
+                                            label="Template Name"
+                                            type="text"
+                                            isImportant
+                                            name="name"
+                                            border='border-[1px] border-gray-800'
+                                            placeholder="e.g: Suitable"
+                                            value={templateName}
+                                            onChange={(e) => setTemplateName(e.target.value)}
+                                        />
+                                        <label htmlFor="remarks" className='text-lg 3xl:text-2xl '>Description<span className='text-red-500 text-lg font-semibold'>*</span></label>
+                                        <textarea
+                                            className={`border-[1px] 3xl:text-2xl border-gray-700 3xl:h-36 sm:h-24 w-full p-1 resize-none rounded-md outline-none `}
+                                            name="template"
+                                            id="template"
+                                            cols="30"
+                                            rows="10"
+                                            onChange={(e) => setTemplateDesc(e.target.value)}
+                                            value={templateDesc}
+                                        ></textarea>
+                                    </div>
+                                </>
+                            }
                             <div className="self-end w-full flex justify-center">
                                 <button className='bg-[#1c75bc] px-3 py-2 w-1/2 mt-3 hover:bg-blue-400 text-white rounded-full ' onClick={handleAddTemplate}>Add</button>
                             </div>

@@ -26,8 +26,9 @@
     const dispatch = useDispatch();
     let users;
     // Sort the userData array by applied_date
-    let sortedData = [...allUserData].sort((a, b) => new Date(a.applied_date) - new Date(b.applied_date));
     
+    let sortedData = [...allUserData].sort((a, b) => new Date(a.applied_date) - new Date(b.applied_date));
+  
     // Pagination loginc
     const [recordsPerPage, setRecordsPerPage] = useState(10); // Default value
     
@@ -77,7 +78,7 @@
       }
 
       fetchData();
-    }, []);
+    }, [dispatch, allUserData]);
 
     useEffect(() => {
       const anyValueSelected = role !== '';
@@ -255,7 +256,7 @@
         {/* Add entry form */}
 
         {handelAddUser && (
-          <AddUserForm setAlert={setAlert} isAddClicked={handelAddUser} setIsAddClicked={setHandelAddUser} />
+          <AddUserForm setAlert={setAlert} isAddClicked={handelAddUser} setIsAddClicked={setHandelAddUser}  />
         )}
       </>
     )

@@ -366,7 +366,7 @@ const Setting = ({ setAlert }) => {
                                     (
 
                                         currentTemplates.map((type, index) => (
-                                            <Types setTypes={setEmployeeTypes} setAlert={setAlert} key={index} type={type} isEmployee={true} isTempalte={true} />
+                                            <Types setTypes={setEmployeeTypes} setAlert={setAlert} key={index} type={type} isEmployee={false} isTempalte={true} />
                                         ))
 
                                     )

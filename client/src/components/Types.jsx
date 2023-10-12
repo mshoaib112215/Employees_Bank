@@ -48,16 +48,20 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
         }
         catch (error) {
         }
-        finally{
+        finally {
             setSaving(false)
 
         }
     }
 
 
-    const handleDelete = async (id, assoc_entry) => {
+    const handleDelete = async (id, assoc_entry = null) => {
         setDeleted(false)
-        const assoc_ids = assoc_entry.map((item) => item._id)
+        let assoc_ids = []
+        console.log(assoc_entry)
+        if (assoc_entry != {}) {
+            assoc_ids = assoc_entry?.map((item) => item._id)
+        }
         setAlert({ message: <Loader isTransparent />, type: "loading" });
         let response
         try {
@@ -75,7 +79,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                     setAlert({ message: "Internal error in deleting associated Entries", type: "error" });
                 }
             }
-            else {
+            if (!isEmployee && !isTempalte) {
                 response = await deleteAllRec(assoc_ids)
                 if (response.status !== 400) {
 
@@ -91,7 +95,6 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                 }
             }
             if (!isTempalte) {
-
                 if (response.deletedCount >= 1) {
                     setAlert({ message: "Deleted Successfully", type: "success" });
                     setTypes(prevTypes => prevTypes.filter(type => type._id !== id));
@@ -148,7 +151,7 @@ const Types = ({ type, setTypes, setAlert, isEmployee = false, isTempalte = fals
                         <p className="mb-4"><span className='font-semibold'>{`${!isTempalte ? (!isEmployee ? applied_fors.length : employee_types.length) : ''}`}</span> {`${!isTempalte ? 'entries are associated with it.' : ''} `}Are you sure you want to delete this entry?</p>
                         <div className="flex justify-end">
                             <button className="border border-red-500 px-3 py-1 rounded-md mr-2 hover:bg-red-500 hover:text-white" onClick={() => setDeleted(false)}>Cancel</button>
-                            <button className="bg-red-500 text-white px-3  py-1 rounded-md hover:bg-red-600" onClick={() => handleDelete(type._id, !isTempalte ? (!isEmployee ? applied_fors : employee_types) : {})}>Delete</button>
+                            <button className="bg-red-500 text-white px-3  py-1 rounded-md hover:bg-red-600" onClick={() => handleDelete(type._id, !isTempalte ? (!isEmployee ? applied_fors : employee_types) : null)}>Delete</button>
                         </div>
                     </div>
                 </div>

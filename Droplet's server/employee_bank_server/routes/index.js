@@ -34,6 +34,8 @@ router.get('/user/:id', authController.getUser);
 router.post('/logout', auth, authController.logout)
 // Upload Images
 router.post('/upload', auth, authController.uploadImage);
+// Delete Images
+router.delete('/delete-avatar', auth, authController.deleteImage);
 
 router.get('/get-avatar/:id', authController.sendAvatar);
 

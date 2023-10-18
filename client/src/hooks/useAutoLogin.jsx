@@ -16,7 +16,7 @@ function useAutoLogin() {
         const response = await axios.get(
           // `https://192.168.83.48:3000/refresh`,
           // `https://139.59.79.69:3000/refresh`,
-          `https://server-ilkbswvou-mshoaib112215-gmailcom.vercel.app/refresh`,
+          `https://employee-bank-server.vercel.app/refresh`,
           {
             withCredentials: true,
             headers: {

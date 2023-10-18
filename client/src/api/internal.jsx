@@ -8,7 +8,7 @@ const navigating = () => {
 
 }
 const api = axios.create({
-    baseURL: `https://server-ilkbswvou-mshoaib112215-gmailcom.vercel.app/`,
+    baseURL: `https://employee-bank-server.vercel.app/`,
     // baseURL: 'https://139.59.79.69:3000/',
     // baseURL: 'https://192.168.83.48:3000/',
     withCredentials: true,
